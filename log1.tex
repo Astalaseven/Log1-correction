@@ -10,6 +10,8 @@
 
 \chapter*{Correction des exercices 4.4}
 
+\vspace{-2cm}
+
 \begin{Emphase}{Simplification d’algorithme}
 
 \begin{minipage}{5cm}
@@ -195,13 +197,16 @@
 \begin{pseudo}
 \Module{salaireNet}{}{}
 
-    \Decl salaire : entier
+    \Decl salaireBrut : entier
     \Decl constante RETENUE : 15
+    \Decl salaireNet : entier
     \Read salaire
     \If{salaire > 1200}
-        \Let salaire \Gets salaire - (salaire * RETENUE) / 100
+        \Let salaireNet \Gets salaire - (salaire * RETENUE) / 100
+        \Write salaireNet
+    \Else
+        \Write salaireBrut
     \EndIf
-    \Write salaire
 
 \EndModule
 \end{pseudo}
@@ -218,11 +223,12 @@
     \Decl jours : entier
     \Read mois
     \Switch{mois \K{vaut}}
-        \Case{JANVIER, MARS, MAI, JUILLET, AOÛT, OCTOBRE, DÉCEMBRE}
+        \Case{"JANVIER", "MARS", "MAI", "JUILLET", "AOÛT", "OCTOBRE",
+        "DÉCEMBRE"}
             \Write 31
-        \Case{AVRIL, JUIN, SEPTEMBRE, NOVEMBRE}
+        \Case{"AVRIL", "JUIN", "SEPTEMBRE", "NOVEMBRE"}
             \Write 30
-        \Case{FÉVRIER}
+        \Case{"FÉVRIER"}
             \Write 28
     \EndSwitch
 
@@ -239,6 +245,7 @@
 \Module{estBissextile}{}{}
 
     \Decl annee : entier
+    \Write annee
     \Write annee MOD 4 = 0 ET NON(annee MOD 100 = 0) OU annee MOD 400 = 0
 
 \EndModule
@@ -253,13 +260,9 @@
 \Module{dateValide}{}{}
 
     \Decl annee, mois, jour, jourMois : entiers
-    \Decl anneeBissextile : booléen
+    \Decl bissextile : booléen
     \Read jour, mois, annee
-    \If{annee MOD 4 = 0 ET NON(annee MOD 100 = 0)}
-        \Let anneeBissextile \Gets vrai
-    \Else
-        \Let anneeBissextile \Gets annee MOD 400 = 0
-    \EndIf
+    \Let bissextile \Gets annee MOD 4 = 0 ET annee MOD 100 <> 0 OU annee MOD 400 = 0
 
     \Switch{mois \K{vaut}}
         \Case{1, 3, 5, 7, 8, 10, 12}
@@ -267,7 +270,7 @@
         \Case{4, 6, 9, 11}
             \Let jourMois \Gets 30
         \Case{2}
-            \If{anneeBissextile}
+            \If{bissextile}
                 \Let jourMois \Gets 29
             \Else
                 \Let jourMois \Gets 28
@@ -291,14 +294,14 @@
 
     \Decl dateMois : entier
     \Read dateMois
-    \Switch{dateMois MOD 8 \K{vaut}}
-        \Stmt 1 : \K{afficher} "vendredi"
-        \Stmt 2 : \K{afficher} "samedi"
-        \Stmt 3 : \K{afficher} "dimanche"
-        \Stmt 4 : \K{afficher} "lundi"
-        \Stmt 5 : \K{afficher} "mardi"
-        \Stmt 6 : \K{afficher} "mercredi"
-        \Stmt 7 : \K{afficher} "jeudi"
+    \Switch{dateMois MOD 7 \K{vaut}}
+        \Stmt 0 : \K{afficher} "vendredi"
+        \Stmt 1 : \K{afficher} "samedi"
+        \Stmt 2 : \K{afficher} "dimanche"
+        \Stmt 3 : \K{afficher} "lundi"
+        \Stmt 4 : \K{afficher} "mardi"
+        \Stmt 5 : \K{afficher} "mercredi"
+        \Stmt 6 : \K{afficher} "jeudi"
     \EndSwitch
 
 \EndModule
@@ -325,14 +328,14 @@
         \Stmt "dimanche" : jourFutur \Gets 7
     \EndSwitch
 
-    \Switch{(jourFutur + n) MOD 8 \K{vaut}}
-        \Stmt 1 : \K{afficher} "vendredi"
-        \Stmt 2 : \K{afficher} "samedi"
-        \Stmt 3 : \K{afficher} "dimanche"
-        \Stmt 4 : \K{afficher} "lundi"
-        \Stmt 5 : \K{afficher} "mardi"
-        \Stmt 6 : \K{afficher} "mercredi"
-        \Stmt 7 : \K{afficher} "jeudi"
+    \Switch{(jourFutur + n) MOD 7 \K{vaut}}
+        \Stmt 0 : \K{afficher} "lundi"
+        \Stmt 1 : \K{afficher} "mardi"
+        \Stmt 2 : \K{afficher} "mercredi"
+        \Stmt 3 : \K{afficher} "jeudi"
+        \Stmt 4 : \K{afficher} "vendredi"
+        \Stmt 5 : \K{afficher} "samedi"
+        \Stmt 6 : \K{afficher} "dimanche"
     \EndSwitch
 
 \EndModule
@@ -374,9 +377,9 @@
     
     \Decl dateJour, numMaison : entiers
     \If{1 $\ge$ dateJour $\ge$ 15}
-        \Write NON(dateJour MOD 2 = 0)
+        \Write NON(numMaison MOD 2 = 0)
     \Else
-        \Write dateJour MOD 2 = 0
+        \Write numMaison MOD 2 = 0
     \EndIf
 
 \EndModule
