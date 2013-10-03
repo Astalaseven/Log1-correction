@@ -1,0 +1,380 @@
+\chapter*{Correction des exercices 4.4}
+
+\vspace{-2cm}
+
+\begin{Emphase}{Simplification d’algorithme}
+
+\begin{minipage}{5cm}
+\begin{pseudo}
+
+    \If{ok}
+        \Write nombre
+    \EndIf
+
+\end{pseudo}
+\end{minipage}
+\begin{minipage}{5cm}
+\begin{pseudo}
+
+    \If{NON ok}
+        \Write nombre
+    \EndIf
+
+\end{pseudo}
+\end{minipage}
+\begin{minipage}{5cm}
+\begin{pseudo}
+
+    \If{ok1 ET ok2}
+        \Write x
+    \EndIf
+
+\end{pseudo}
+\\\\
+\end{minipage}
+
+\begin{minipage}{5cm}
+\begin{pseudo}
+
+    \Let ok \Gets condition
+
+\end{pseudo}
+\end{minipage}
+\begin{minipage}{5cm}
+\begin{pseudo}
+
+    \Let ok \Gets a $\ge$ b
+
+\end{pseudo}
+\end{minipage}
+\end{Emphase}
+
+
+\begin{Emphase}{Exercice 3 -- Maximum de 2 nombres}
+\cadre{
+\begin{pseudo}
+\Module{max2Nb}{}{}
+
+    \Decl nb1, nb2 : entiers
+    \Decl max : entier
+    \Read nb1, nb2
+    \If{nb2 $\ge$ nb1}
+        \Let max \Gets nb2
+    \Else
+        \Let max \Gets nb1
+    \EndIf
+    \Write max
+
+\EndModule
+\end{pseudo}
+}
+\end{Emphase}
+
+
+\begin{Emphase}{Exercice 4 -- Maximum de 3 nombres}
+\cadre{
+\begin{pseudo}
+\Module{max3Nb}{}{}
+
+    \Decl nb1, nb2, nb3 : entiers
+    \Decl max : entier
+    \Read nb1, nb2, nb3
+    \If{nb2 $\ge$ nb1}
+        \Let max \Gets nb2
+    \Else
+        \Let max \Gets nb1
+    \EndIf
+    \If{nb3 $\ge$ max}
+        \Let max \Gets nb3
+    \EndIf
+    \Write max
+
+\EndModule
+\end{pseudo}
+}
+\end{Emphase}
+
+\newpage
+
+\begin{Emphase}{Exercice 5 -- Signe}
+\cadre{
+\begin{pseudo}
+\Module{signe}{}{}
+
+    \Decl nb : entier
+    \Read nb
+    \Switch{}
+        \Stmt nb > 0 : \K{afficher} "positif"
+        \Stmt nb < 0 : \K{afficher} "négatif"
+        \Stmt autre : \K{afficher} "nul"
+    \EndSwitch
+
+\EndModule
+\end{pseudo}
+}
+\end{Emphase}
+
+
+\begin{Emphase}{Exercice 6 -- La fourchette}
+\cadre{
+\begin{pseudo}
+\Module{fourchette}{}{}
+
+    \Decl nb1, nb2, nb3, petit, grand : entiers
+    \Decl ok : booléen
+    \Read nb1, nb2, nb3
+    \If{nb2 > nb3}
+        \Let petit \Gets nb3
+        \Let grand \Gets nb2
+    \Else
+        \Let petit \Gets nb2
+        \Let grand \Gets nb3
+    \EndIf
+
+    \Write \Gets nb1 > petit ET nb1 < grand    
+
+\EndModule
+\end{pseudo}
+}
+\end{Emphase}
+
+
+\begin{Emphase}{Exercice 7 -- Équation du second degré}
+\cadre{
+\begin{pseudo}
+\Module{racinesÉquation}{}{}
+
+    \Decl coeffCarré, coeff, termeIndé : entiers
+    \Decl delta : entier
+    \Read coeffCarré, coeff, termeIndé
+    \Let delta \Gets (coeff)$^2$ - 4 * coeffCarré * termeIndé
+    \Switch{}
+        \Stmt delta > 0 : \K{afficher} (-coeff $\pm$ $\sqrt{\text{delta}}$)/(2 * coeffCarré)
+        \Stmt delta = 0 : \K{afficher} -coeff/(2 * coeffCarré)
+        \Stmt autres : afficher "pas de racine"
+    \EndSwitch
+
+\EndModule
+\end{pseudo}
+}
+\end{Emphase}
+
+\newpage
+
+\begin{Emphase}{Exercice 8 -- Une petite minute}
+\cadre{
+\begin{pseudo}
+\Module{plusUneMin}{}{}
+
+    \Decl heure, minute : entiers
+    \Read heure, minute
+    \If{minute = 59}
+        \Let minute \Gets 0
+        \Let heure \Gets heure + 1
+    \Else
+        \Let minute \Gets minute + 1
+    \EndIf
+    \Write heure, minute
+
+\EndModule
+\end{pseudo}
+}
+\end{Emphase}
+
+
+\begin{Emphase}{Exercice 9 -- Calcul de salaire}
+\cadre{
+\begin{pseudo}
+\Module{salaireNet}{}{}
+
+    \Decl salaireBrut : entier
+    \Decl constante RETENUE : 15
+    \Decl salaireNet : entier
+    \Read salaire
+    \If{salaire > 1200}
+        \Let salaireNet \Gets salaire - (salaire * RETENUE) / 100
+        \Write salaireNet
+    \Else
+        \Write salaireBrut
+    \EndIf
+
+\EndModule
+\end{pseudo}
+}
+\end{Emphase}
+
+
+\begin{Emphase}{Exercice 10 -- Nombres de jours dans un mois}
+\cadre{
+\begin{pseudo}
+\Module{nbJours}{}{}
+
+    \Decl mois : chaine
+    \Decl jours : entier
+    \Read mois
+    \Switch{mois \K{vaut}}
+        \Case{"JANVIER", "MARS", "MAI", "JUILLET", "AOÛT", "OCTOBRE",
+        "DÉCEMBRE"}
+            \Write 31
+        \Case{"AVRIL", "JUIN", "SEPTEMBRE", "NOVEMBRE"}
+            \Write 30
+        \Case{"FÉVRIER"}
+            \Write 28
+    \EndSwitch
+
+\EndModule
+\end{pseudo}
+}
+\end{Emphase}
+
+\newpage
+
+\begin{Emphase}{Exercice 11 -- Année bissextile}
+\cadre{
+\begin{pseudo}
+\Module{estBissextile}{}{}
+
+    \Decl annee : entier
+    \Write annee
+    \Write annee MOD 4 = 0 ET NON(annee MOD 100 = 0) OU annee MOD 400 = 0
+
+\EndModule
+\end{pseudo}
+}
+\end{Emphase}
+
+
+\begin{Emphase}{Exercice 12 -- Valider une date}
+\cadre{
+\begin{pseudo}
+\Module{dateValide}{}{}
+
+    \Decl annee, mois, jour, jourMois : entiers
+    \Decl bissextile : booléen
+    \Read jour, mois, annee
+    \Let bissextile \Gets annee MOD 4 = 0 ET annee MOD 100 <> 0 OU annee MOD 400 = 0
+
+    \Switch{mois \K{vaut}}
+        \Case{1, 3, 5, 7, 8, 10, 12}
+            \Let jourMois \Gets 31
+        \Case{4, 6, 9, 11}
+            \Let jourMois \Gets 30
+        \Case{2}
+            \If{bissextile}
+                \Let jourMois \Gets 29
+            \Else
+                \Let jourMois \Gets 28
+            \EndIf
+        \Case{\K{autres }} \Write "mois inconnu"
+    \EndSwitch
+
+    \Write 1 $\le$ jour $\le$ jourMois
+
+\EndModule
+\end{pseudo}
+}
+\end{Emphase}
+
+%\newpage
+
+\begin{Emphase}{Exercice 13 -- Le jour de la semaine}
+\cadre{
+\begin{pseudo}
+\Module{jourSemaine}{}{}
+
+    \Decl dateMois : entier
+    \Read dateMois
+    \Switch{dateMois MOD 7 \K{vaut}}
+        \Stmt 0 : \K{afficher} "vendredi"
+        \Stmt 1 : \K{afficher} "samedi"
+        \Stmt 2 : \K{afficher} "dimanche"
+        \Stmt 3 : \K{afficher} "lundi"
+        \Stmt 4 : \K{afficher} "mardi"
+        \Stmt 5 : \K{afficher} "mercredi"
+        \Stmt 6 : \K{afficher} "jeudi"
+    \EndSwitch
+
+\EndModule
+\end{pseudo}
+}
+\end{Emphase}
+
+
+\begin{Emphase}{Exercice 14 -- Quel jour serons-nous~?}
+\cadre{
+\begin{pseudo}
+\Module{jourFutur}{}{}
+
+    \Decl jour : chaine
+    \Decl n, jourFutur : entier
+    \Read jour, n
+    \Switch{jour \K{vaut}}
+        \Stmt "lundi"    : jourFutur \Gets 1
+        \Stmt "mardi"    : jourFutur \Gets 2
+        \Stmt "mercredi" : jourFutur \Gets 3
+        \Stmt "jeudi"    : jourFutur \Gets 4
+        \Stmt "vendredi" : jourFutur \Gets 5
+        \Stmt "samedi"   : jourFutur \Gets 6
+        \Stmt "dimanche" : jourFutur \Gets 7
+    \EndSwitch
+
+    \Switch{(jourFutur + n) MOD 7 \K{vaut}}
+        \Stmt 0 : \K{afficher} "lundi"
+        \Stmt 1 : \K{afficher} "mardi"
+        \Stmt 2 : \K{afficher} "mercredi"
+        \Stmt 3 : \K{afficher} "jeudi"
+        \Stmt 4 : \K{afficher} "vendredi"
+        \Stmt 5 : \K{afficher} "samedi"
+        \Stmt 6 : \K{afficher} "dimanche"
+    \EndSwitch
+
+\EndModule
+\end{pseudo}
+}
+\end{Emphase}
+
+
+\begin{Emphase}{Exercice 15 -- Un peu de trigono}
+\cadre{
+\begin{pseudo}
+\Module{cosinus}{}{}
+
+    \Decl n : entier
+    \Decl cosinus : entier
+    \Read n
+    \If{NON(n MOD 2 = 0)}
+        \Let cosinus \Gets 0
+    \Else
+        \If{(n/2) MOD 2 = 0}
+            \Let cosinus \Gets 1
+        \Else
+            \Let cosinus \Gets -1
+        \EndIf
+    \EndIf
+    \Write cosinus
+
+\EndModule
+\end{pseudo}
+}
+\end{Emphase}
+
+\newpage
+
+\begin{Emphase}{Exercice 16 -- Le stationnement alternatif}
+\cadre{
+\begin{pseudo}
+\Module{bienStationné}{}{}
+    
+    \Decl dateJour, numMaison : entiers
+    \If{1 $\ge$ dateJour $\ge$ 15}
+        \Write NON(numMaison MOD 2 = 0)
+    \Else
+        \Write numMaison MOD 2 = 0
+    \EndIf
+
+\EndModule
+\end{pseudo}
+}
+\end{Emphase}
+
+
