@@ -1,0 +1,122 @@
+\chapter*{Correction des exercices 5.8}
+
+\vspace{-2cm}
+
+
+\begin{Emphase}{Exercice 4 -- Échange de variables}
+\cadre{
+\begin{pseudo}
+\Module{swap}{a\In\Out,b\In\Out~:~entiers}{}
+
+    \Let a \Gets a + b
+    \Let b \Gets a - b
+    \Let a \Gets a - b
+
+\EndModule
+\end{pseudo}
+}
+\end{Emphase}
+
+
+\begin{Emphase}{Exercice 5 -- Valeur absolue}
+\cadre{
+\begin{pseudo}
+\Module{abs}{a~:~réel}{réel}
+
+    \If{a < 0}
+        \Let a \Gets -a
+    \EndIf
+    \Return a
+
+\EndModule
+\end{pseudo}
+}
+\end{Emphase}
+
+
+\begin{Emphase}{Exercice 6 -- Maximum de 4 nombres}
+\cadre{
+\begin{pseudo}
+\Module{max4Nb}{a\In,b\In,c\In,d\In~:~entiers}{entier}
+
+    \Decl max : entier
+    \Let max \Gets max2(max3(a,b,c), d)
+    \Return max
+
+\EndModule
+\end{pseudo}
+}
+\end{Emphase}
+
+\newpage
+
+\begin{Emphase}{Exercice 7 -- Validité d’une date}
+\cadre{
+\begin{pseudo}
+\Module{dateValide}{jour, mois, annee~:~entiers}{booléen}
+
+    \Return 1 $\le$ jour $\le$ nbJours(mois, annee)
+
+\EndModule
+
+\Module{estBissextile}{annee~:~entier}{booléen}
+
+    \Return annee MOD 4 = 0 ET NON(annee MOD 100 = 0) OU annee MOD 400 = 0 
+
+\EndModule
+
+\Module{nbJours}{mois, annee~:~entiers}{entier}
+
+    \Switch{mois \K{vaut}}
+    \Case{1, 3, 5, 7, 8, 10, 12}
+        \Return 31
+    \Case{4, 6, 9, 11}
+        \Return 30
+    \Case{2}
+        \If{estBissextile(annee)}
+            \Return 29
+        \Else
+            \Return 28
+        \EndIf
+    \Case{\K{autres}}
+        \Error "mois inconnu"
+    \EndSwitch
+
+\EndModule
+
+
+
+\end{pseudo}
+}
+\end{Emphase}
+
+
+\begin{Emphase}{Exercice 7 -- Valider une date}
+\cadre{
+\begin{pseudo}
+\Module{dateValide}{jour, mois, annee~:~entiers}{booléen}
+
+    \Decl jourMois~:~entier
+    \Decl bissextile~:~booléen 
+
+    \Switch{mois \K{vaut}}
+        \Case{1, 3, 5, 7, 8, 10, 12}
+            \Let jourMois \Gets 31
+        \Case{4, 6, 9, 11}
+            \Let jourMois \Gets 30
+        \Case{2}
+            \Let bissextile \Gets annee MOD 4 = 0 ET annee MOD 100 <> 0 OU annee MOD 400 = 0
+            \If{bissextile}
+                \Let jourMois \Gets 29
+            \Else
+                \Let jourMois \Gets 28
+            \EndIf
+        \Case{\K{autres }} \Error "mois inconnu"
+    \EndSwitch
+
+    \Return 1 $\le$ jour $\le$ jourMois
+
+\EndModule
+\end{pseudo}
+}
+\end{Emphase}

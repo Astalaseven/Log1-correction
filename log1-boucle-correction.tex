@@ -1,0 +1,284 @@
+\chapter*{Correction des exercices 7.4}
+
+\vspace{-2cm}
+
+\begin{Emphase}{Exercice 3 -- Afficher les $n$ premiers}
+\cadre{
+\begin{pseudo}
+
+\Module{strictementPositifs}{}{}
+
+    \Decl n, i~:~entiers
+    \Read n
+
+    \For{i \K{de} 0 \K{à} n}
+        \Write i
+    \EndFor
+
+\EndModule
+\\
+\Module{strictementPositifsDécroissants}{}{}
+
+    \Decl n, i~:~entiers
+    \Read n
+
+    \For{i \K{de} n \K{à} 0 \K{par} -1}
+        \Write i
+    \EndFor
+
+\EndModule
+\\ 
+\Module{carrésParfaits}{}{}
+
+    \Decl n, i~:~entiers
+    \Read n
+
+    \For{i \K{de} 0 \K{à} n}
+        \Write i$^2$
+    \EndFor
+
+\EndModule
+\\
+\Module{naturelsImpairs}{}{}
+
+    \Decl n, i~:~entiers
+    \Read n
+
+    \For{i \K{de} 1 \K{à} n * 2 \K{par} 2}
+        \Write i
+    \EndFor
+
+\EndModule
+\\
+\Module{naturelsImpairsInférieurs}{}{}
+
+    \Decl n, i~:~entiers
+    \Read n
+
+    \For{i \K{de} 1 \K{à} n/2 \K{par} 2}
+        \Write i
+    \EndFor
+
+\end{pseudo}
+}
+\end{Emphase}
+
+\newpage
+
+\begin{Emphase}{Exercice 4 -- Maximum de nombres}
+\cadre{
+\begin{pseudo}
+\Module{maxCote}{}{}
+
+    \Decl cote, max~:~entier
+    \Let max \Gets 0
+    \Repeat
+        \Read cote
+        \If{cote > max}
+                \Let max \Gets cote
+        \EndIf
+    \Until{cote = -1}
+    \Write max
+
+\EndModule
+\end{pseudo}
+}
+\end{Emphase}
+
+
+\begin{Emphase}{Exercice 5 -- Afficher les multiples de 3}
+\cadre{
+\begin{pseudo}
+\Module{multiplesDe3}{}{}
+
+    \Decl nombre, multiple3~:~entier
+    \Repeat
+        \Read nombre
+        \If{nombre MOD 3 = 0}
+               \Write nombre
+               \Let multiple3 \Gets multiple3 + 1
+        \EndIf
+    \Until{nombre = 0}
+    \Write multiple3
+
+\EndModule
+\end{pseudo}
+}
+\end{Emphase}
+
+
+
+\begin{Emphase}{Exercice 6 -- Placement d’un capital}
+\cadre{
+\begin{pseudo}
+\Module{placementCapital}{}{}
+
+    \Decl capitalDépart, nbAnnées, tauxPlacement, capitalIntérêt~:~entiers
+    \Read capitalDépart, nbAnnées, tauxPlacement
+    \For{année \K{de} 2013 \K{à} n}
+        \Let capitalIntérêt \Gets capitalDépart + (tauxPlacement *
+        capitalDépart)/100
+        \Write année, capitalDépart, capitalIntérêt - capitalDépart
+    \EndFor
+
+\EndModule
+\end{pseudo}
+}
+\end{Emphase}
+
+\newpage
+
+\begin{Emphase}{Exercice 7 -- Produit de 2 nombres}
+\cadre{
+\begin{pseudo}
+\Module{produit2Nb}{}{}
+
+    \Decl nb1, nb2~:~entiers
+    \Read nb1, nb2
+    \Return nb1 / (1/nb2)
+
+\EndModule
+\end{pseudo}
+}
+\end{Emphase}
+
+\begin{Emphase}{Exercice 8 -- Génération de suites (1/2)}
+\cadre{
+\begin{pseudo}
+
+\Module{pasCroissant}{}{}
+
+    \Decl pas~:~entier
+    \Let pas \Gets 1
+
+    \For{i \K{de} 1 \K{à} n}
+        \Write i + pas - 1
+        \Let pas \Gets i
+    \EndFor
+
+\EndModule
+\\
+
+\Module{boiteuse}{}{}
+
+    \For{i \K{de} 1 \K{à} n}
+        \If{i MOD 3 = 1}
+            \Write i
+        \EndIf
+    \EndFor
+
+\EndModule
+\\
+
+\Module{suiteDeFibonacci}{}{}
+
+    \Decl i1, i2~:~entiers
+    \Let i1 \Gets 0
+    \Let i2 \Gets 1
+
+    \If{n = 0}
+        \Write i1
+    \Else
+        \If{n = 1}
+            \Write i1,i2
+        \Else
+            \Write i1,i2
+            \While{1 < n}
+                \Let i \Gets i1 + i2
+                \Let i2 \Gets i1
+                \Let i1 \Gets i
+                \Write i
+            \EndWhile
+        \EndIf
+    \EndIf
+
+\EndModule
+\\
+
+\end{pseudo}
+}
+\end{Emphase}
+
+\newpage
+
+\begin{Emphase}{Exercice 8 -- Génération de suites (2/2)}
+\cadre{
+\begin{pseudo}
+
+\Module{processionEchternach}{}{}
+
+    \For{i \K{de} 1 \K{à} n}
+        \Write i, i + 1, i + 2, i + 3, i + 2
+    \EndFor
+
+\EndModule
+\\
+
+\Module{combinaison2Suites}{}{}
+
+    \For{i \K{de} 1 \K{à} n}
+        \Write i + (i - 1), i + 1
+    \EndFor
+
+\EndModule
+\\
+\Module{capricieuse}{}{}
+
+\For{i \K{de} 1 \K{à} n}
+    \If{i MOD 2 = 1}
+        \For{j \K{de} 10 * i - 9 \K{à} 10 * i}
+            \Write j
+        \EndFor
+    \Else
+        \For{j \K{de} i * 10 \K{à} i * 10 - 9 \K{par} -1}
+            \Write j
+        \EndFor
+    \EndIf
+\EndFor
+\EndModule
+
+\end{pseudo}
+}
+\end{Emphase}
+
+\begin{Emphase}{Exercice 9 -- Factorielle}
+\cadre{
+\begin{pseudo}
+\Module{factorielle}{}{}
+
+    \Decl n, fact~:~entiers
+    \Let fact \Gets 1
+    \Read n
+
+    \For{i \K{de} n \K{à} 1 \K{par} -1}
+        \Let fact \Gets fact * i
+    \EndFor
+
+    \Write fact
+
+\EndModule
+
+\end{pseudo}
+}
+\end{Emphase}
+
+\begin{Emphase}{Exercice 10 -- Somme de chiffres}
+\cadre{
+\begin{pseudo}
+\Module{sommeChiffre}{}{}
+
+    \Decl chiffre, nombre~:~entiers
+    \Read nombre
+
+    \While{nombre > 0}
+        \Let chiffre \Gets nombre MOD 10
+        \Let nombre \Gets nombre / 10 
+    \EndWhile
+
+    \Write chiffre
+
+\EndModule
+
+\end{pseudo}
+}
+\end{Emphase}

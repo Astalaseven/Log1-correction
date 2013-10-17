@@ -1,0 +1,193 @@
+\chapter*{Correction des exercices 6.6}
+
+\vspace{-2cm}
+
+\begin{Emphase}{Structure -- Moment}
+\cadre{
+\begin{pseudo}
+\Struct{Moment}
+    \Decl heure~:~entier
+    \Decl minute~:~entier
+    \Decl seconde~:~entier
+\EndStruct
+\end{pseudo}
+}
+\end{Emphase}
+
+\begin{Emphase}{Exercice 1 -- Conversion moment-secondes}
+\cadre{
+\begin{pseudo}
+
+\Module{secondeMinuit}{moment\In~:~Moment}{entier}
+    
+    \Return moment.heure * 3600 + moment.minute * 60 + moment.seconde
+
+\EndModule
+\end{pseudo}
+}
+\end{Emphase}
+
+\begin{Emphase}{Exercice 2 -- Conversion secondes-moment}
+\cadre{
+\begin{pseudo}
+\Module{secondesVersMoments}{secondes\In~:~entier}{Moment}
+
+    \Decl moment~:~Moment
+    \Let moment \Gets $\displaystyle \left\{ \dfrac{\text{secondes}}{3600},
+    \dfrac{(\text{secondes~MOD~} 3600)}{60}, \text{secondes~MOD~} 60 \right\}$
+    \Return moment
+
+\EndModule
+\end{pseudo}
+}
+\end{Emphase}
+
+\begin{Emphase}{Exercice 3 -- Temps écoulé entre 2 moments}
+\cadre{
+\begin{pseudo}
+\Module{écartEntreMoments}{moment1, moment2~:~Moments}{entier}
+
+    \Return{SecondesMinuit(moment1) - SecondesMinuit(moment2)}
+
+\EndModule
+
+\end{pseudo}
+}
+\end{Emphase}
+
+\begin{Emphase}{Exercice 4 -- Milieu de deux points}
+\cadre{
+\begin{pseudo}
+\Module{MilieuSegment}{a, b~:~Points}{Point}
+
+    \Return $\displaystyle \left\{ \dfrac{a.x + b.x}{2} , \dfrac{a.y + b.y}{2}
+    \right\}$
+
+\EndModule
+
+\end{pseudo}
+}
+\end{Emphase}
+
+\begin{Emphase}{Exercice 5 -- Distance entre deux points}
+\cadre{
+\begin{pseudo}
+\Module{LongueurSegment}{a, b~:~Points}{entier}
+
+    \Return $\sqrt{(b.x - a.x)^2 + (b.y - a.y)^2}$
+
+\EndModule
+
+\end{pseudo}
+}
+\end{Emphase}
+
+\begin{Emphase}{Exercice 6 -- Un cercle}
+\cadre{
+\begin{pseudo}
+\Struct{Cercle}
+    
+    \Decl centre~:~Point
+    \Decl rayon~:~réel
+
+\EndStruct
+\\
+\Module{SurfaceCercle}{cercle\In~:~Cercle}{réel}
+
+    \Return $\pi * $ (cercle.rayon)$^2$
+
+\EndModule
+\\
+\Module{CréeCercle}{a, b~:~Points}{Cercle}
+
+    \Decl cercle~:~Cercle
+    \Let cercle.centre \Gets a
+    \Let cercle.rayon \Gets LongueurSegment(a,b)
+    \Return cercle
+
+\EndModule
+\\
+\Module{pointDansCercle}{point~:~Point, cercle~:~Cercle}{booléen}
+
+    \Return $\sqrt{(\text{point.x} - \text{cercle.centre.x})^2 + (\text{cercle.centre.y} - \text{point.y})}$ <
+cercle.rayon
+
+\EndModule
+\\
+\Module{IntersectionCercle}{cercle1, cercle2~:~Cercles}{booléen}
+
+    \Decl distanCentre~:~réel
+    \Let distanceCentre \Gets LongueurSegment(cercle1.centre, cercle2.centre)
+    \Return distanceCentre - (cercle1.rayon * 2 - cercle2.rayon * 2) $\le$ 0
+
+\EndModule
+
+\end{pseudo}
+}
+\end{Emphase}
+
+\newpage
+
+\begin{Emphase}{Exercice 7 -- Un rectangle}
+\cadre{
+\begin{pseudo}
+
+\Struct{Rectangle}
+
+    \Decl bg~:~Point
+    \Decl hd~:~Point
+
+\EndStruct
+\\
+\Module{périmètreRectangle}{rect~:~Rectangle}{réel}
+
+    \Decl base, hauteur~:~réels
+    \Let base \Gets LongueurSegment(rect.bg.x, rect.hd.x) 
+    \Let hauteur \Gets LongueurSegment(rect.bg.y, rect.hd.y) 
+    \Return 2 * base + 2 * hauteur
+
+\EndModule
+\\
+\Module{aireRectangle}{rect\In~:~Rectangle}{réel}
+    
+    \Decl base, hauteur~:~réels
+    \Let base \Gets LongueurSegment(rect.bg.x, rect.hd.x) 
+    \Let hauteur \Gets LongueurSegment(rect.bg.y, rect.hd.y) 
+
+    \Return base * hauteur
+
+\EndModule
+\\
+\Module{pointDansRectangle}{rect~:~Rectangle, point~:~Point}{booléen}
+
+    \Return (rect.bg.x $\le$ point.x $\le$ rect.hd.x) ET (rect.bg.y $\le$ point.y
+    $\le$ rect.hd.y)
+
+\EndModule
+\\
+\Module{pointSurSegment}{rect~:~Rectangle, point~:~Point}{booléen}
+
+    \If{rect.bg.x $\le$ point.x $\le$ rect.hd.x ET rect.bg.y = point.y}
+        \Return vrai
+    \ElseIf{rect.bg.y $\le$ point.y $\le$ rect.hd.y ET rect.bg.x = point.x}
+    \EndIf
+
+\EndModule
+\\
+\Module{pointSurBordRectangle}{rect~:~Rectangle, point~:~Point}{booléen}
+
+\Decl surBaseBas, surBaseHaut, surHauteurGauche, surHauteurDroit~:~booléens
+
+\Let surBaseBas \Gets rect.bg.x $\le$ point.x $\le$ rect.hd.x ET (rect.bg.y = point.y)
+\Let surBaseHaut \Gets rect.bd.x $\le$ point.x $\le$ rect.hd.x ET (rect.hd.y = point.y)
+\Let surCotéGauche \Gets rect.bg.y $\le$ point.y $\le$ rect.hd.y ET (rect.bg.x = point.x)
+\Let surCotéDroit \Gets rect.bg.y $\le$ point.y $\le$ rect.hd.y ET (rect.hd.x = point.x)
+
+\Return surBaseBas OU surBaseHaut OU surCotéGauche OU surCotéDroit
+
+\EndModule
+
+
+\end{pseudo}
+}
+\end{Emphase}   
