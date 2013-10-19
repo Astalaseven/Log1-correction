@@ -282,3 +282,440 @@
 \end{pseudo}
 }
 \end{Emphase}
+
+\begin{Emphase}{Exercice 11 -- Conversion binaire-décimal}
+\cadre{
+\begin{pseudo}
+\Module{BinaireDécimal}{}{}
+
+    \Decl décimal, i~:~réels
+    \Decl nb~:~entier
+    \Let décimal \Gets 0
+    \Let i \Gets 0
+    \Read nb
+
+    \While{nb > 0}
+        \Let décimal \Gets nb MOD 10 * 2$^i$ + décimal
+        \Let nb \Gets nb / 10 
+        \Let i \Gets i + 1
+    \EndWhile
+
+    \Write décimal
+
+\EndModule
+
+\end{pseudo}
+}
+\end{Emphase}
+
+
+\begin{Emphase}{Exercice 12 -- Conversion décimal-binaire}
+\cadre{
+\begin{pseudo}
+\Module{DécimalBinaire}{}{}
+
+    \Decl binaire~:~chaine
+    \Decl nb~:~entier
+    \Read nb
+
+    \While{nb > 0}
+    \Let binaire \Gets concat(binaire, nb MOD 2)
+        \Let nb \Gets nb / 2 
+    \EndWhile
+
+    \For{i \K{de} long(binaire) \K{à} 1 \K{par} -1}
+        \Write car(binaire, i)
+    \EndFor
+
+    \Write binaire
+
+\EndModule
+
+\end{pseudo}
+}
+\end{Emphase}
+
+\begin{Emphase}{Exercice 13 -- PGCD}
+\cadre{
+\begin{pseudo}
+
+\Module{PGCD}{a, b~:~entiers}{entier}
+
+    \Decl reste~:~entier
+    \Decl trouvé~:~booléen
+    \Let trouvé \Gets faux
+
+    \While{NON trouvé}
+    \Let reste \Gets a MOD b
+
+    \If{reste = 0}
+        \Return b
+        \Let trouvé \Gets vrai
+    \EndIf
+
+    \Let a \Gets b
+    \Let b \Gets reste
+    \EndWhile
+
+
+\EndModule
+
+\end{pseudo}
+}
+\end{Emphase}
+
+\begin{Emphase}{Exercice 14 -- PPCM}
+\cadre{
+\begin{pseudo}
+
+\Module{PPCM}{a, b~:~entiers}{entier}
+
+    \Return abs(a * b) / PGCD(a, b)
+
+\EndModule
+
+\end{pseudo}
+}
+\end{Emphase}
+
+\begin{Emphase}{Exercice 15 -- Nombre premier}
+\cadre{
+\begin{pseudo}
+
+\Module{estPremier}{nb~:~entier}{booléen}
+
+    \If{nb = 0 OU nb = 1}
+
+        \Return faux
+
+    \EndIf
+
+    \If{nb = 2}
+
+        \Return vrai
+
+    \EndIf
+
+    \If{nb MOD 2 = 0}
+        
+        \Return faux
+
+    \EndIf
+
+    \For{i \K{de} 3 \K{à} $\sqrt{\text{nb}}$ \K{par} 2}
+
+        \If{nb MOD i = 0}
+            
+            \Return faux
+
+        \EndIf
+
+    \EndFor
+
+    \Return vrai
+
+\EndModule
+
+\end{pseudo}
+}
+\end{Emphase}
+
+
+\begin{Emphase}{Exercice 16 -- Nombres premiers}
+\cadre{
+\begin{pseudo}
+
+\Module{nombresPremiers}{nb~:~entier}{}
+
+    \For{i \K{de} 2 \K{à} nb}
+        \If{i MOD 2 = 0 ET estPremier(i)}
+            \Write i
+        \EndIf
+    \EndFor
+
+\EndModule
+
+\end{pseudo}
+}
+\end{Emphase}
+
+\newpage
+
+\begin{Emphase}{Exercice 17 -- Nombre parfait}
+\cadre{
+\begin{pseudo}
+
+\Module{nbParfait}{nb~:~entier}{booléen}
+
+    \Decl somme~:~entier
+    \Let somme \Gets 0
+
+    \If{nb = 6}
+        \Return vrai
+    \EndIf
+
+    \For{i \K{de} 1 \K{à} 2$^{(\text{n} - 1) / 2}$ \K{par} 2}
+        \Let somme \Gets somme + i$^3$
+
+    \EndFor
+
+    \Return nb = somme
+
+\EndModule
+
+\end{pseudo}
+}
+\end{Emphase}
+
+
+\begin{Emphase}{Exercice 18 -- Décomposition en facteurs premiers}
+\cadre{
+\begin{pseudo}
+
+\Module{facteursPremiers}{nb~:~entier}{}
+
+    \Decl i~:~entier
+    \Let i \Gets 2
+    \While{i <= nb}
+        \If{nb MOD i = 0 ET estPremier(i)}
+            \Write i
+            \Let nb \Gets nb/i
+            \If{nb >= 1}
+                \Write " * "
+            \EndIf
+            \Let i \Gets i - 1
+        \EndIf
+        \Let i \Gets i + 1
+    \EndWhile
+
+    \If{nb MOD i $\ne$ 0}
+        \Write " * ", nb MOD i
+    \EndIf
+
+\EndModule
+
+\end{pseudo}
+}
+\end{Emphase}
+
+
+\begin{Emphase}{Exercice 19 -- Palindrome}
+\cadre{
+\begin{pseudo}
+
+\Module{palindrome}{nb~:~entier}{booléen}
+
+    \Decl palindrome, inverse~:~entiers
+    \Let inverse \Gets 0
+    \Let palindrome \Gets nb
+    \While{palindrome != 0}
+
+        \Let chiffre \Gets palindrome MOD 10
+        \Let inverse \Gets inverse * 10 + chiffre
+        \Let palindrome \Gets palindrome / 10
+
+    \EndWhile
+
+    \Return nb = inverse
+
+\EndModule
+
+\end{pseudo}
+}
+\end{Emphase}
+
+\newpage
+
+\begin{Emphase}{Exercice 20 -- Jeu de la fourchette}
+\cadre{
+\begin{pseudo}
+
+\Module{fourchette}{}{}
+
+    \Decl nbRandom, essai, tentative~:~entiers
+    \Let tentative \Gets 1
+    \Let nbRandom \Gets hasard(100)
+
+    \Repeat
+
+        \Write "Entrez un nombre"
+        \Read essai
+
+        \Switch
+    \Case{nbRandom > essai} \Write "le nb est plus grand"
+    \Case{nbRandom < essai} \Write "le nb est plus petit"
+        \EndSwitch
+
+        \Let tentative \Gets tentative + 1
+
+    \Until{tentative = 8 OU nbRandom = essai}
+
+    \If{nbRandom $\ne$ essai}
+        \Write "désolé, le nb était ", nbRandom
+    \Else
+        \Write "bravo, vous avez trouvé en ", tentative, " coups"
+    \EndIf
+
+\EndModule
+
+\end{pseudo}
+}
+\end{Emphase}
+
+
+\begin{Emphase}{Exercice 21 -- IMC}
+\cadre{
+\begin{pseudo}
+
+\Module{IMC}{}{}
+
+    \Decl imc~:~réel
+    \Decl sexe, poids, taille~:~réels
+    \Decl obèse, nbPersonnes~:~entier
+    \Repeat
+
+        \Read sexe, poids, taille
+        \Let imc \Gets kilo / taille$^2$
+
+        \If{imc > 30}
+            \Let obèse \Gets obèse + 1
+        \EndIf
+
+        \Let nbPersonnes \Gets nbPersonnes + 1
+
+    \Until{sexe $\ne$ 'H' OU sexe $\ne$ 'F'}
+
+    \Write obèse / nbPersonnes * 100
+
+\EndModule
+
+\end{pseudo}
+}
+\end{Emphase}
+
+\newpage
+
+\begin{Emphase}{Exercice 22 -- Cotes}
+\cadre{
+\begin{pseudo}
+
+\Module{cotesEtudiants}{}{}
+
+    \Decl coteInt, coteExam, coteTotal, coteMax~:~réel
+    \Decl absence, réussite, nbCote~:~entier
+    \While{fin = faux}
+
+        \For{i \K{de} 1 à 3}
+
+            \Read cote
+
+            \If{cote = -1}
+                \Let cote \Gets absence
+            \Else
+                \Let coteInt \Gets coteInt + cote
+                \Let nbCote \Gets nbCote + 1
+            \EndIf
+
+        \EndFor
+
+        \Read coteExam
+        \Let nbCote \Gets nbCote + 1
+        \If{coteExam = -1}
+            \Let coteExam \Gets 0
+        \EndIf
+
+        \Switch
+            \Case{absence = 1}
+            \Let coteExam \Gets coteExam / 100 * 120
+            \Case{absence = 2}
+            \Let coteExam \Gets coteExam / 100 * 140
+            \Case{absence = 3}
+            \Let coteExam \Gets coteExam / 100 * 160
+        \EndSwitch
+
+        \Let coteTotal \Gets (coteInt + coteExam) / 8
+
+        \If{coteTotal > 12}
+            \Let réussite \Gets réussite + 1
+        \EndIf
+
+        \Let coteMax \Gets max2Nb(coteMax, coteTotal)
+
+    \EndWhile
+
+    \Write nbCote, coteMax, réussite / nbCote * 100
+
+\EndModule
+
+\end{pseudo}
+}
+\end{Emphase}
+
+
+\begin{Emphase}{Exercice 23 -- Normaliser une chaine}
+\cadre{
+\begin{pseudo}
+
+\Module{versAlpha}{chaine~:~chaine}{chaine}
+
+    \Decl chaineAlpha~:~chaine
+    \Decl lettre~:~caractère
+    \For{lettre \K{de} 1 \K{à} long(chaine)}
+        \Let lettre \Gets majuscule(car(chaineAlpha, lettre))
+        \If{estLettre(lettre)}
+            \Let chaineAlpha \Gets concat(chaineAlpha, lettre)
+        \EndIf
+   \EndFor
+
+    \Return chaineAlpha
+
+\EndModule
+
+\end{pseudo}
+}
+\end{Emphase}
+
+\newpage
+
+\begin{Emphase}{Exercice 24 -- Le chiffre de César (1/2)}
+\cadre{
+\begin{pseudo}
+
+\Module{chiffrementCésar}{chaine~:~chaine, k~:~entier}{chaine}
+
+    \Decl chaineTraduite~:~chaine
+    \Let chaine \Gets versAlpha(chaine)
+    \For{lettre \K{de} 1 \K{à} long(chaine)}
+        \Let lettre \Gets position(car(chaine, lettre)) + k
+        \If{lettre > 26}
+            \Let lettre \Gets (lettre MOD 26) + 1
+        \EndIf
+        \If{lettre < 1}
+            \Let lettre \Gets 26 - abs(lettre MOD 26)
+        \EndIf
+        \Let lettre \Gets lettre(lettre)
+        \Let chaineTraduite \Gets concat(chaineTraduite, lettre)
+   \EndFor
+
+    \Return chaineTraduite
+
+\EndModule
+
+\end{pseudo}
+}
+\end{Emphase}
+
+
+\begin{Emphase}{Exercice 24 -- Le chiffre de César (2/2)}
+\cadre{
+\begin{pseudo}
+
+\Module{déchiffrementCésar}{chaine~:~chaine, k~:~entier}{chaine}
+
+    \Return chiffrementCésar(chaine, -k)
+
+\EndModule
+
+\end{pseudo}
+}
+\end{Emphase}
