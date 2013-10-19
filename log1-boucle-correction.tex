@@ -603,6 +603,8 @@
 
     \Decl coteInt, coteExam, coteTotal, coteMax~:~réel
     \Decl absence, réussite, nbCote~:~entier
+    \Decl fin~:~booléen
+    \Decl réponse~:~chaine
     \While{fin = faux}
 
         \For{i \K{de} 1 à 3}
@@ -640,6 +642,10 @@
         \EndIf
 
         \Let coteMax \Gets max2Nb(coteMax, coteTotal)
+
+        \Write "Y a-t-il encore des cotes à rentrer ?"
+        \Read réponse
+        \Let fin \Gets réponse = "non"
 
     \EndWhile
 
