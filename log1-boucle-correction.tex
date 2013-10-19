@@ -3,15 +3,14 @@
 \vspace{-2cm}
 
 \begin{Emphase}{Exercice 3 -- Afficher les $n$ premiers}
-\cadre{
-\begin{pseudo}
+\begin{pseudoN}
 
 \Module{strictementPositifs}{}{}
 
     \Decl n, i~:~entiers
     \Read n
 
-    \For{i \K{de} 0 \K{à} n}
+    \For{i \From 0 \To n}
         \Write i
     \EndFor
 
@@ -22,7 +21,7 @@
     \Decl n, i~:~entiers
     \Read n
 
-    \For{i \K{de} n \K{à} 0 \K{par} -1}
+    \For{i \From n \To 0 \By -1}
         \Write i
     \EndFor
 
@@ -33,7 +32,7 @@
     \Decl n, i~:~entiers
     \Read n
 
-    \For{i \K{de} 0 \K{à} n}
+    \For{i \From 0 \To n}
         \Write i$^2$
     \EndFor
 
@@ -44,7 +43,7 @@
     \Decl n, i~:~entiers
     \Read n
 
-    \For{i \K{de} 1 \K{à} n * 2 \K{par} 2}
+    \For{i \From 1 \To n * 2 \By 2}
         \Write i
     \EndFor
 
@@ -55,19 +54,17 @@
     \Decl n, i~:~entiers
     \Read n
 
-    \For{i \K{de} 1 \K{à} n/2 \K{par} 2}
+    \For{i \From 1 \To n/2 \By 2}
         \Write i
     \EndFor
 
 \end{pseudo}
-}
 \end{Emphase}
 
 \newpage
 
 \begin{Emphase}{Exercice 4 -- Maximum de nombres}
-\cadre{
-\begin{pseudo}
+\begin{pseudoN}
 \Module{maxCote}{}{}
 
     \Decl cote, max~:~entier
@@ -75,47 +72,43 @@
     \Repeat
         \Read cote
         \If{cote > max}
-                \Let max \Gets cote
+            \Let max \Gets cote
         \EndIf
     \Until{cote = -1}
     \Write max
 
 \EndModule
 \end{pseudo}
-}
 \end{Emphase}
 
 
 \begin{Emphase}{Exercice 5 -- Afficher les multiples de 3}
-\cadre{
-\begin{pseudo}
+\begin{pseudoN}
 \Module{multiplesDe3}{}{}
 
     \Decl nombre, multiple3~:~entier
     \Repeat
         \Read nombre
         \If{nombre MOD 3 = 0}
-               \Write nombre
-               \Let multiple3 \Gets multiple3 + 1
+           \Write nombre
+           \Let multiple3 \Gets multiple3 + 1
         \EndIf
     \Until{nombre = 0}
     \Write multiple3
 
 \EndModule
 \end{pseudo}
-}
 \end{Emphase}
 
 
 
 \begin{Emphase}{Exercice 6 -- Placement d’un capital}
-\cadre{
-\begin{pseudo}
+\begin{pseudoN}
 \Module{placementCapital}{}{}
 
     \Decl capitalDépart, nbAnnées, tauxPlacement, capitalIntérêt~:~entiers
     \Read capitalDépart, nbAnnées, tauxPlacement
-    \For{année \K{de} 2013 \K{à} n}
+    \For{année \From 2013 \To n}
         \Let capitalIntérêt \Gets capitalDépart + (tauxPlacement *
         capitalDépart)/100
         \Write année, capitalDépart, capitalIntérêt - capitalDépart
@@ -123,14 +116,12 @@
 
 \EndModule
 \end{pseudo}
-}
 \end{Emphase}
 
 \newpage
 
 \begin{Emphase}{Exercice 7 -- Produit de 2 nombres}
-\cadre{
-\begin{pseudo}
+\begin{pseudoN}
 \Module{produit2Nb}{}{}
 
     \Decl nb1, nb2~:~entiers
@@ -139,19 +130,17 @@
 
 \EndModule
 \end{pseudo}
-}
 \end{Emphase}
 
 \begin{Emphase}{Exercice 8 -- Génération de suites (1/2)}
-\cadre{
-\begin{pseudo}
+\begin{pseudoN}
 
 \Module{pasCroissant}{}{}
 
     \Decl pas~:~entier
     \Let pas \Gets 1
 
-    \For{i \K{de} 1 \K{à} n}
+    \For{i \From 1 \To n}
         \Write i + pas - 1
         \Let pas \Gets i
     \EndFor
@@ -161,7 +150,7 @@
 
 \Module{boiteuse}{}{}
 
-    \For{i \K{de} 1 \K{à} n}
+    \For{i \From 1 \To n}
         \If{i MOD 3 = 1}
             \Write i
         \EndIf
@@ -196,18 +185,16 @@
 \\
 
 \end{pseudo}
-}
 \end{Emphase}
 
 \newpage
 
 \begin{Emphase}{Exercice 8 -- Génération de suites (2/2)}
-\cadre{
-\begin{pseudo}
+\begin{pseudoN}
 
 \Module{processionEchternach}{}{}
 
-    \For{i \K{de} 1 \K{à} n}
+    \For{i \From 1 \To n}
         \Write i, i + 1, i + 2, i + 3, i + 2
     \EndFor
 
@@ -216,7 +203,7 @@
 
 \Module{combinaison2Suites}{}{}
 
-    \For{i \K{de} 1 \K{à} n}
+    \For{i \From 1 \To n}
         \Write i + (i - 1), i + 1
     \EndFor
 
@@ -224,13 +211,13 @@
 \\
 \Module{capricieuse}{}{}
 
-\For{i \K{de} 1 \K{à} n}
+\For{i \From 1 \To n}
     \If{i MOD 2 = 1}
-        \For{j \K{de} 10 * i - 9 \K{à} 10 * i}
+        \For{j \From 10 * i - 9 \To 10 * i}
             \Write j
         \EndFor
     \Else
-        \For{j \K{de} i * 10 \K{à} i * 10 - 9 \K{par} -1}
+        \For{j \From i * 10 \To i * 10 - 9 \By -1}
             \Write j
         \EndFor
     \EndIf
@@ -238,19 +225,17 @@
 \EndModule
 
 \end{pseudo}
-}
 \end{Emphase}
 
 \begin{Emphase}{Exercice 9 -- Factorielle}
-\cadre{
-\begin{pseudo}
+\begin{pseudoN}
 \Module{factorielle}{}{}
 
     \Decl n, fact~:~entiers
     \Let fact \Gets 1
     \Read n
 
-    \For{i \K{de} n \K{à} 1 \K{par} -1}
+    \For{i \From n \To 1 \By -1}
         \Let fact \Gets fact * i
     \EndFor
 
@@ -259,12 +244,10 @@
 \EndModule
 
 \end{pseudo}
-}
 \end{Emphase}
 
 \begin{Emphase}{Exercice 10 -- Somme de chiffres}
-\cadre{
-\begin{pseudo}
+\begin{pseudoN}
 \Module{sommeChiffre}{}{}
 
     \Decl chiffre, nombre~:~entiers
@@ -280,12 +263,10 @@
 \EndModule
 
 \end{pseudo}
-}
 \end{Emphase}
 
 \begin{Emphase}{Exercice 11 -- Conversion binaire-décimal}
-\cadre{
-\begin{pseudo}
+\begin{pseudoN}
 \Module{BinaireDécimal}{}{}
 
     \Decl décimal, i~:~réels
@@ -305,13 +286,11 @@
 \EndModule
 
 \end{pseudo}
-}
 \end{Emphase}
 
 
 \begin{Emphase}{Exercice 12 -- Conversion décimal-binaire}
-\cadre{
-\begin{pseudo}
+\begin{pseudoN}
 \Module{DécimalBinaire}{}{}
 
     \Decl binaire~:~chaine
@@ -323,7 +302,7 @@
         \Let nb \Gets nb / 2 
     \EndWhile
 
-    \For{i \K{de} long(binaire) \K{à} 1 \K{par} -1}
+    \For{i \From long(binaire) \To 1 \By -1}
         \Write car(binaire, i)
     \EndFor
 
@@ -332,12 +311,10 @@
 \EndModule
 
 \end{pseudo}
-}
 \end{Emphase}
 
 \begin{Emphase}{Exercice 13 -- PGCD}
-\cadre{
-\begin{pseudo}
+\begin{pseudoN}
 
 \Module{PGCD}{a, b~:~entiers}{entier}
 
@@ -361,12 +338,10 @@
 \EndModule
 
 \end{pseudo}
-}
 \end{Emphase}
 
 \begin{Emphase}{Exercice 14 -- PPCM}
-\cadre{
-\begin{pseudo}
+\begin{pseudoN}
 
 \Module{PPCM}{a, b~:~entiers}{entier}
 
@@ -375,12 +350,10 @@
 \EndModule
 
 \end{pseudo}
-}
 \end{Emphase}
 
 \begin{Emphase}{Exercice 15 -- Nombre premier}
-\cadre{
-\begin{pseudo}
+\begin{pseudoN}
 
 \Module{estPremier}{nb~:~entier}{booléen}
 
@@ -402,7 +375,7 @@
 
     \EndIf
 
-    \For{i \K{de} 3 \K{à} $\sqrt{\text{nb}}$ \K{par} 2}
+    \For{i \From 3 \To $\sqrt{\text{nb}}$ \By 2}
 
         \If{nb MOD i = 0}
             
@@ -417,17 +390,15 @@
 \EndModule
 
 \end{pseudo}
-}
 \end{Emphase}
 
 
 \begin{Emphase}{Exercice 16 -- Nombres premiers}
-\cadre{
-\begin{pseudo}
+\begin{pseudoN}
 
 \Module{nombresPremiers}{nb~:~entier}{}
 
-    \For{i \K{de} 2 \K{à} nb}
+    \For{i \From 2 \To nb}
         \If{i MOD 2 = 0 ET estPremier(i)}
             \Write i
         \EndIf
@@ -436,14 +407,12 @@
 \EndModule
 
 \end{pseudo}
-}
 \end{Emphase}
 
 \newpage
 
 \begin{Emphase}{Exercice 17 -- Nombre parfait}
-\cadre{
-\begin{pseudo}
+\begin{pseudoN}
 
 \Module{nbParfait}{nb~:~entier}{booléen}
 
@@ -454,7 +423,7 @@
         \Return vrai
     \EndIf
 
-    \For{i \K{de} 1 \K{à} 2$^{(\text{n} - 1) / 2}$ \K{par} 2}
+    \For{i \From 1 \To 2$^{(\text{n} - 1) / 2}$ \By 2}
         \Let somme \Gets somme + i$^3$
 
     \EndFor
@@ -464,13 +433,11 @@
 \EndModule
 
 \end{pseudo}
-}
 \end{Emphase}
 
 
 \begin{Emphase}{Exercice 18 -- Décomposition en facteurs premiers}
-\cadre{
-\begin{pseudo}
+\begin{pseudoN}
 
 \Module{facteursPremiers}{nb~:~entier}{}
 
@@ -495,13 +462,11 @@
 \EndModule
 
 \end{pseudo}
-}
 \end{Emphase}
 
 
 \begin{Emphase}{Exercice 19 -- Palindrome}
-\cadre{
-\begin{pseudo}
+\begin{pseudoN}
 
 \Module{palindrome}{nb~:~entier}{booléen}
 
@@ -521,14 +486,12 @@
 \EndModule
 
 \end{pseudo}
-}
 \end{Emphase}
 
 \newpage
 
 \begin{Emphase}{Exercice 20 -- Jeu de la fourchette}
-\cadre{
-\begin{pseudo}
+\begin{pseudoN}
 
 \Module{fourchette}{}{}
 
@@ -559,13 +522,11 @@
 \EndModule
 
 \end{pseudo}
-}
 \end{Emphase}
 
 
 \begin{Emphase}{Exercice 21 -- IMC}
-\cadre{
-\begin{pseudo}
+\begin{pseudoN}
 
 \Module{IMC}{}{}
 
@@ -590,14 +551,12 @@
 \EndModule
 
 \end{pseudo}
-}
 \end{Emphase}
 
 \newpage
 
 \begin{Emphase}{Exercice 22 -- Cotes}
-\cadre{
-\begin{pseudo}
+\begin{pseudoN}
 
 \Module{cotesEtudiants}{}{}
 
@@ -607,7 +566,7 @@
     \Decl réponse~:~chaine
     \While{fin = faux}
 
-        \For{i \K{de} 1 à 3}
+        \For{i \From 1 \To 3}
 
             \Read cote
 
@@ -626,13 +585,13 @@
             \Let coteExam \Gets 0
         \EndIf
 
-        \Switch
-            \Case{absence = 1}
-            \Let coteExam \Gets coteExam / 100 * 120
-            \Case{absence = 2}
-            \Let coteExam \Gets coteExam / 100 * 140
-            \Case{absence = 3}
-            \Let coteExam \Gets coteExam / 100 * 160
+        \SwitchC{absence}
+            \Case{1}
+                \Let coteExam \Gets coteExam / 100 * 120
+            \Case{2}
+                \Let coteExam \Gets coteExam / 100 * 140
+            \Case{3}
+                \Let coteExam \Gets coteExam / 100 * 160
         \EndSwitch
 
         \Let coteTotal \Gets (coteInt + coteExam) / 8
@@ -654,19 +613,17 @@
 \EndModule
 
 \end{pseudo}
-}
 \end{Emphase}
 
 
 \begin{Emphase}{Exercice 23 -- Normaliser une chaine}
-\cadre{
-\begin{pseudo}
+\begin{pseudoN}
 
 \Module{versAlpha}{chaine~:~chaine}{chaine}
 
     \Decl chaineAlpha~:~chaine
     \Decl lettre~:~caractère
-    \For{lettre \K{de} 1 \K{à} long(chaine)}
+    \For{lettre \From 1 \To long(chaine)}
         \Let lettre \Gets majuscule(car(chaineAlpha, lettre))
         \If{estLettre(lettre)}
             \Let chaineAlpha \Gets concat(chaineAlpha, lettre)
@@ -678,20 +635,18 @@
 \EndModule
 
 \end{pseudo}
-}
 \end{Emphase}
 
 \newpage
 
 \begin{Emphase}{Exercice 24 -- Le chiffre de César (1/2)}
-\cadre{
-\begin{pseudo}
+\begin{pseudoN}
 
 \Module{chiffrementCésar}{chaine~:~chaine, k~:~entier}{chaine}
 
     \Decl chaineTraduite~:~chaine
     \Let chaine \Gets versAlpha(chaine)
-    \For{lettre \K{de} 1 \K{à} long(chaine)}
+    \For{lettre \From 1 \To long(chaine)}
         \Let lettre \Gets position(car(chaine, lettre)) + k
         \If{lettre > 26}
             \Let lettre \Gets (lettre MOD 26) + 1
@@ -708,13 +663,11 @@
 \EndModule
 
 \end{pseudo}
-}
 \end{Emphase}
 
 
 \begin{Emphase}{Exercice 24 -- Le chiffre de César (2/2)}
-\cadre{
-\begin{pseudo}
+\begin{pseudoN}
 
 \Module{déchiffrementCésar}{chaine~:~chaine, k~:~entier}{chaine}
 
@@ -723,5 +676,4 @@
 \EndModule
 
 \end{pseudo}
-}
 \end{Emphase}
