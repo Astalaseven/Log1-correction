@@ -34,7 +34,7 @@
 
     \Decl moment~:~Moment
     \Let moment \Gets $\displaystyle \left\{ \dfrac{\text{secondes}}{3600},
-    \dfrac{(\text{secondes~MOD~} 3600)}{60}, \text{secondes~MOD~} 60 \right\}$
+    \dfrac{\text{secondes~MOD~} 3600}{60}, \text{secondes~MOD~} 60 \right\}$
     \Return moment
 
 \EndModule
@@ -94,7 +94,7 @@
 \\
 \Module{SurfaceCercle}{cercle\In~:~Cercle}{réel}
 
-    \Return $\pi * $ (cercle.rayon)$^2$
+    \Return $\pi$ * (cercle.rayon)$^2$
 
 \EndModule
 \\
@@ -102,15 +102,14 @@
 
     \Decl cercle~:~Cercle
     \Let cercle.centre \Gets a
-    \Let cercle.rayon \Gets LongueurSegment(a,b)
+    \Let cercle.rayon \Gets LongueurSegment(a,b) / 2
     \Return cercle
 
 \EndModule
 \\
 \Module{pointDansCercle}{point~:~Point, cercle~:~Cercle}{booléen}
 
-    \Return $\sqrt{(\text{point.x} - \text{cercle.centre.x})^2 + (\text{cercle.centre.y} - \text{point.y})}$ <
-cercle.rayon
+    \Return LongueurSegment(point, cercle.centre) < cercle.rayon
 
 \EndModule
 \\
@@ -162,15 +161,6 @@ cercle.rayon
 
     \Return (rect.bg.x $\le$ point.x $\le$ rect.hd.x) ET (rect.bg.y $\le$ point.y
     $\le$ rect.hd.y)
-
-\EndModule
-\\
-\Module{pointSurSegment}{rect~:~Rectangle, point~:~Point}{booléen}
-
-    \If{rect.bg.x $\le$ point.x $\le$ rect.hd.x ET rect.bg.y = point.y}
-        \Return vrai
-    \ElseIf{rect.bg.y $\le$ point.y $\le$ rect.hd.y ET rect.bg.x = point.x}
-    \EndIf
 
 \EndModule
 \\
