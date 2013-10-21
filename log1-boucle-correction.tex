@@ -642,23 +642,24 @@
 \begin{Emphase}{Exercice 24 -- Le chiffre de César (1/2)}
 \begin{pseudoN}
 
-\Module{chiffrementCésar}{chaine~:~chaine, k~:~entier}{chaine}
+\Module{chiffrementCésar}{msgClair~:~chaine, k~:~entier}{chaine}
 
-    \Decl chaineTraduite~:~chaine
-    \Let chaine \Gets versAlpha(chaine)
-    \For{lettre \From 1 \To long(chaine)}
-        \Let lettre \Gets position(car(chaine, lettre)) + k
-        \If{lettre > 26}
-            \Let lettre \Gets (lettre MOD 26) + 1
+    \Decl msgChiffré~:~chaine
+    \Decl carClair, carChiffré~:~caractères
+    \Let msgChiffré \Gets ""
+    \For{i \From 1 \To long(msgClair)}
+        \Let carClair \Gets numLettre(car(msgClair, carClair)) + k
+        \If{carClair > 26}
+            \Let carClair \Gets carClair MOD 26
         \EndIf
-        \If{lettre < 1}
-            \Let lettre \Gets 26 - abs(lettre MOD 26)
+        \If{carClair < 1}
+            \Let carClair \Gets abs(carClair - 1) MOD 26 + 1
         \EndIf
-        \Let lettre \Gets lettre(lettre)
-        \Let chaineTraduite \Gets concat(chaineTraduite, lettre)
+        \Let carChiffré \Gets lettre(carClair)
+        \Let msgChiffré \Gets concat(msgChiffré, carChiffré)
    \EndFor
 
-    \Return chaineTraduite
+    \Return msgChiffré
 
 \EndModule
 
@@ -669,11 +670,42 @@
 \begin{Emphase}{Exercice 24 -- Le chiffre de César (2/2)}
 \begin{pseudoN}
 
-\Module{déchiffrementCésar}{chaine~:~chaine, k~:~entier}{chaine}
+\Module{déchiffrementCésar}{message~:~chaine, k~:~entier}{chaine}
 
-    \Return chiffrementCésar(chaine, -k)
+    \Return chiffrementCésar(message, -k)
 
 \EndModule
 
+\end{pseudo}
+\end{Emphase}
+
+
+\begin{Emphase}{Exercice 24 -- Le chiffre de César (solution Github)}
+\begin{pseudoN}
+    \Module{chiffrerCésar}{msgClair\In: chaine, déplacement\In: entier}{chaine}
+        \Decl msgChiffré : chaine
+        \Decl carClair, carChiffré : caractères
+        \Decl i : entier
+        \Empty
+        \Let msgChiffré \Gets ""
+        \For{i \K{de} 1 \K{à} long(msgClair)}
+             \Let carClair \Gets car(msgClair,i)
+             \Let carChiffré \Gets avancer(carClair, déplacement)
+             \Let msgChiffré \Gets concat( msgChiffré, chaine(carChiffré) )
+        \EndFor
+        \Return msgChiffré
+        \EndModule
+
+			\Empty
+        \LComment{Calcule la lettre qui est "delta" position plus loin dans l'alphabet (circulairement)}
+        \Module{avancer}{lettre\In: caractère, delta\In: entier}{caractère}
+            \Return lettre( (numLettre(lettre) + delta - 1) MOD 26 + 1 ) 
+        \EndModule
+
+			\Empty
+        \LComment{Déchiffrer un message chiffré avec le chiffre de César}
+        \Module{déchiffrerCésar}{msgClair\In: chaine, déplacement\In: entier}{chaine}
+            \Return chiffrerCésar(msgClair, 26 - déplacement)
+        \EndModule
 \end{pseudo}
 \end{Emphase}
