@@ -79,7 +79,7 @@
             \Return 28
         \EndIf
     \Case{\K{autres}}
-        \Error "mois inconnu"
+        \Return 0
     \EndSwitch
 
 \EndModule
@@ -91,32 +91,4 @@
 \end{Emphase}
 
 
-\begin{Emphase}{Exercice 7 -- Valider une date}
-\cadre{
-\begin{pseudo}
-\Module{dateValide}{jour, mois, annee~:~entiers}{booléen}
 
-    \Decl jourMois~:~entier
-    \Decl bissextile~:~booléen 
-
-    \Switch{mois \K{vaut}}
-        \Case{1, 3, 5, 7, 8, 10, 12}
-            \Let jourMois \Gets 31
-        \Case{4, 6, 9, 11}
-            \Let jourMois \Gets 30
-        \Case{2}
-            \Let bissextile \Gets annee MOD 4 = 0 ET annee MOD 100 <> 0 OU annee MOD 400 = 0
-            \If{bissextile}
-                \Let jourMois \Gets 29
-            \Else
-                \Let jourMois \Gets 28
-            \EndIf
-        \Case{\K{autres }} \Error "mois inconnu"
-    \EndSwitch
-
-    \Return 1 $\le$ jour $\le$ jourMois
-
-\EndModule
-\end{pseudo}
-}
-\end{Emphase}
