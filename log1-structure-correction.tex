@@ -33,8 +33,8 @@
 \Module{secondesVersMoments}{secondes\In~:~entier}{Moment}
 
     \Decl moment~:~Moment
-    \Let moment \Gets $\displaystyle \left\{ \dfrac{\text{secondes}}{3600},
-    \dfrac{\text{secondes~MOD~} 3600}{60}, \text{secondes~MOD~} 60 \right\}$
+    \Let moment \Gets \{secondes DIV 3600,
+(secondes MOD 3600) DIV 60, secondes MOD 60\} 
     \Return moment
 
 \EndModule
@@ -47,7 +47,11 @@
 \begin{pseudo}
 \Module{écartEntreMoments}{moment1, moment2~:~Moments}{entier}
 
-    \Return{SecondesMinuit(moment1) - SecondesMinuit(moment2)}
+\If{secondeMinuit(moment1) > secondeMinuit(moment2)}
+    \Return{secondeMinuit(moment1) - secondeMinuit(moment2)}
+\Else
+    \Return{secondeMinuit(moment2) - secondeMinuit(moment1)}
+\EndIf
 
 \EndModule
 
@@ -101,7 +105,7 @@
 \Module{CréeCercle}{a, b~:~Points}{Cercle}
 
     \Decl cercle~:~Cercle
-    \Let cercle.centre \Gets a
+    \Let cercle.centre \Gets MilieuSegment(a,b)
     \Let cercle.rayon \Gets LongueurSegment(a,b) / 2
     \Return cercle
 
