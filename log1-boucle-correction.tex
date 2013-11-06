@@ -10,7 +10,7 @@
     \Decl n, i~:~entiers
     \Read n
 
-    \For{i \From 0 \To n}
+    \For{i \From 1 \To n}
         \Write i
     \EndFor
 
@@ -21,7 +21,7 @@
     \Decl n, i~:~entiers
     \Read n
 
-    \For{i \From n \To 0 \By -1}
+    \For{i \From n \To 1 \By -1}
         \Write i
     \EndFor
 
@@ -32,7 +32,7 @@
     \Decl n, i~:~entiers
     \Read n
 
-    \For{i \From 0 \To n}
+    \For{i \From 1 \To n}
         \Write i$^2$
     \EndFor
 
@@ -40,11 +40,14 @@
 \\
 \Module{naturelsImpairs}{}{}
 
-    \Decl n, i~:~entiers
+    \Decl n, nb, i~:~entiers
     \Read n
 
-    \For{i \From 1 \To n * 2 \By 2}
-        \Write i
+    \Let nb \Gets 1
+
+    \For{i \From 1 \To n}
+        \Write nb
+        \Let nb \Gets nb + 2
     \EndFor
 
 \EndModule
@@ -54,27 +57,31 @@
     \Decl n, i~:~entiers
     \Read n
 
-    \For{i \From 1 \To n/2 \By 2}
+    \For{i \From 1 \To n \By 2}
         \Write i
     \EndFor
+
+\EndModule
 
 \end{pseudo}
 \end{Emphase}
 
 \newpage
 
-\begin{Emphase}{Exercice 4 -- Maximum de nombres}
+\begin{Emphase}{Exercice 4 -- Maximum de cotes}
 \begin{pseudoN}
 \Module{maxCote}{}{}
 
     \Decl cote, max~:~entier
+    \Let cote \Gets 0
     \Let max \Gets 0
-    \Repeat
-        \Read cote
+    \Read cote
+    \While{cote $\ge$ 0}
         \If{cote > max}
             \Let max \Gets cote
         \EndIf
-    \Until{cote = -1}
+        \Read cote
+    \EndWhile
     \Write max
 
 \EndModule
@@ -86,14 +93,16 @@
 \begin{pseudoN}
 \Module{multiplesDe3}{}{}
 
-    \Decl nombre, multiple3~:~entier
-    \Repeat
-        \Read nombre
+    \Decl nombre, multiple3~:~entiers
+    \Let nombre \Gets 1
+    \Read nombre
+    \While{nombre $\ne$ 0}
         \If{nombre MOD 3 = 0}
            \Write nombre
            \Let multiple3 \Gets multiple3 + 1
         \EndIf
-    \Until{nombre = 0}
+        \Read nombre
+    \EndWhile
     \Write multiple3
 
 \EndModule
@@ -122,64 +131,85 @@
 
 \begin{Emphase}{Exercice 7 -- Produit de 2 nombres}
 \begin{pseudoN}
-\Module{produit2Nb}{}{}
+\Module{min}{nb1, nb2~:~entiers}{entier}
+    
+    \If{nb1 < nb2}
+        \Return nb1
+    \Else
+        \Return nb2
+    \EndIf
 
-    \Decl nb1, nb2~:~entiers
-    \Read nb1, nb2
-    \Return nb1 / (1/nb2)
+\EndModule
+
+\Module{produit2Nb}{nb1, nb2~:~entiers}{entier}
+
+    \Decl max, min, somme~:~entiers
+    \Let somme \Gets 0
+    \Let max \Gets max(nb1, nb2)
+    \Let min \Gets min(nb1, nb2)
+
+    \For{i \From 1 \To abs(min)}
+        \Let somme \Gets somme + max
+    \EndFor
+
+    \If{min < 0}
+        \Let somme \Gets -somme
+    \EndIf
+
+    \Return somme
 
 \EndModule
 \end{pseudo}
 \end{Emphase}
 
+\vspace{-0.35cm}
+
 \begin{Emphase}{Exercice 8 -- Génération de suites (1/2)}
 \begin{pseudoN}
 
-\Module{pasCroissant}{}{}
+\Module{pasCroissant}{n~:~entier}{}
 
-    \Decl pas~:~entier
-    \Let pas \Gets 1
+    \Decl nb~:~entier
+    \Let nb \Gets 1
 
     \For{i \From 1 \To n}
-        \Write i + pas - 1
-        \Let pas \Gets i
+        \Write nb
+        \Let nb \Gets nb + i
     \EndFor
 
 \EndModule
 \\
 
-\Module{boiteuse}{}{}
+\Module{boiteuse}{n~:~entier}{}
+
+    \Decl nb, pas~:~entiers
+    \Let nb \Gets 1
+    \Let pas \Gets 2
 
     \For{i \From 1 \To n}
-        \If{i MOD 3 = 1}
-            \Write i
-        \EndIf
+
+        \Write nb
+
+        \Let pas \Gets 3 - pas
+
+        \Let nb \Gets nb + pas
+
     \EndFor
 
 \EndModule
 \\
 
-\Module{suiteDeFibonacci}{}{}
+\Module{suiteDeFibonacci}{n~:~entier}{}
 
-    \Decl i1, i2~:~entiers
-    \Let i1 \Gets 0
-    \Let i2 \Gets 1
+    \Decl val, prec~:~entnbers
+    \Let val \Gets 0
+    \Let prec \Gets 1
 
-    \If{n = 0}
-        \Write i1
-    \Else
-        \If{n = 1}
-            \Write i1,i2
-        \Else
-            \Write i1,i2
-            \While{1 < n}
-                \Let i \Gets i1 + i2
-                \Let i2 \Gets i1
-                \Let i1 \Gets i
-                \Write i
-            \EndWhile
-        \EndIf
-    \EndIf
+    \For{i \From 1 \To n}
+        \Write val
+        \Let val \Gets val + prec
+        \Let prec \Gets val - prec
+    \EndFor
 
 \EndModule
 \\
@@ -192,54 +222,88 @@
 \begin{Emphase}{Exercice 8 -- Génération de suites (2/2)}
 \begin{pseudoN}
 
-\Module{processionEchternach}{}{}
 
-    \For{i \From 1 \To n}
-        \Write i, i + 1, i + 2, i + 3, i + 2
+\Module{processionEchternach}{n~:~entier}{}
+
+    \Decl val, i~:~entier
+    \Let val \Gets 1
+    \For{i \From 1 \To  n}
+        \Write val
+
+        \If{1 $\le$ i MOD 5 ET i MOD 5 $\le$ 3}
+            \Let val \Gets val + 1
+        \Else
+            \Let val \Gets val - 1
+        \EndIf
+
     \EndFor
 
 \EndModule
 \\
 
-\Module{combinaison2Suites}{}{}
+\Module{combinaison2Suites}{n~:~entier}{}
+
+    \Decl première~:~booléen
+    \Decl val1, val2~:~entiers
+
+    \Let première \Gets vrai
+    \Let val1 \Gets 1
+    \Let val2 \Gets 2
 
     \For{i \From 1 \To n}
-        \Write i + (i - 1), i + 1
+        \If{première}
+            \Write val1
+            \Let val1 \Gets val1 + 2
+        \Else
+            \Write val2
+            \Let val2 \Gets val2 + 1
+        \EndIf
     \EndFor
 
 \EndModule
 \\
-\Module{capricieuse}{}{}
+\Module{capricieuse}{n~:~entier}{}
 
-\For{i \From 1 \To n}
-    \If{i MOD 2 = 1}
-        \For{j \From 10 * i - 9 \To 10 * i}
-            \Write j
-        \EndFor
-    \Else
-        \For{j \From i * 10 \To i * 10 - 9 \By -1}
-            \Write j
-        \EndFor
-    \EndIf
-\EndFor
+    \Decl val, pas~:~entiers
+    \Decl descendant~:~booléen
+
+    \Let val, pas \Gets 1
+    \Let descendant \Gets faux
+
+    \For{i \From 1 \To n}
+        \Write val
+        \Let pas \Gets pas + 1
+
+        \If{pas = 10}
+            \Let val \Gets val + 10
+            \Let descendant \Gets NON descendant
+        \EndIf
+
+        \If{descendant}
+            \Let val \Gets val - 1
+        \Else
+            \Let val \Gets val + 1
+        \EndIf
+
+    \EndFor
+
+
 \EndModule
 
 \end{pseudo}
 \end{Emphase}
 
+\newpage
+
 \begin{Emphase}{Exercice 9 -- Factorielle}
 \begin{pseudoN}
-\Module{factorielle}{}{}
+\Module{factorielle}{n~:~entier}{entier}
 
-    \Decl n, fact~:~entiers
-    \Let fact \Gets 1
-    \Read n
-
-    \For{i \From n \To 1 \By -1}
-        \Let fact \Gets fact * i
-    \EndFor
-
-    \Write fact
+    \If{n > 1}
+        \Return n * factorielle(n - 1)
+    \Else
+        \Return 1
+    \EndIf
 
 \EndModule
 
@@ -251,10 +315,11 @@
 \Module{sommeChiffre}{}{}
 
     \Decl chiffre, nombre~:~entiers
+    \Let chiffre \Gets 0
     \Read nombre
 
     \While{nombre > 0}
-        \Let chiffre \Gets nombre MOD 10
+        \Let chiffre \Gets chiffre + nombre MOD 10
         \Let nombre \Gets nombre / 10 
     \EndWhile
 
@@ -281,13 +346,14 @@
         \Let i \Gets i + 1
     \EndWhile
 
-    \Write décimal
+    \Return décimal
 
 \EndModule
 
 \end{pseudo}
 \end{Emphase}
 
+\newpage
 
 \begin{Emphase}{Exercice 12 -- Conversion décimal-binaire}
 \begin{pseudoN}
@@ -319,21 +385,15 @@
 \Module{PGCD}{a, b~:~entiers}{entier}
 
     \Decl reste~:~entier
-    \Decl trouvé~:~booléen
-    \Let trouvé \Gets faux
 
-    \While{NON trouvé}
+    \While{reste != 0}
     \Let reste \Gets a MOD b
-
-    \If{reste = 0}
-        \Return b
-        \Let trouvé \Gets vrai
-    \EndIf
 
     \Let a \Gets b
     \Let b \Gets reste
     \EndWhile
 
+    \Return a
 
 \EndModule
 
@@ -351,6 +411,8 @@
 
 \end{pseudo}
 \end{Emphase}
+
+\newpage
 
 \begin{Emphase}{Exercice 15 -- Nombre premier}
 \begin{pseudoN}
@@ -398,11 +460,35 @@
 
 \Module{nombresPremiers}{nb~:~entier}{}
 
-    \For{i \From 2 \To nb}
-        \If{i MOD 2 = 0 ET estPremier(i)}
+    \For{i \From 1 \To nb \By 2}
+        \If{estPremier(i)}
             \Write i
         \EndIf
     \EndFor
+
+  \EndModule
+
+\end{pseudo}
+\end{Emphase}
+
+
+\begin{Emphase}{Exercice 17 -- Nombre parfait}
+\begin{pseudoN}
+
+\Module{nbParfait}{nb~:~entier}{booléen}
+
+\Decl p~:~entier
+
+\If{nb = 6}
+    \Return vrai
+\EndIf
+
+\Let p \Gets 3
+\While{nb < $2^{(p - 1)} (2^p - 1)$}
+    \Let p \Gets p + 2
+\EndWhile
+
+\Return n = $2^{(p - 1)} (2^p - 1)$
 
 \EndModule
 
@@ -410,31 +496,6 @@
 \end{Emphase}
 
 \newpage
-
-\begin{Emphase}{Exercice 17 -- Nombre parfait}
-\begin{pseudoN}
-
-\Module{nbParfait}{nb~:~entier}{booléen}
-
-    \Decl somme~:~entier
-    \Let somme \Gets 0
-
-    \If{nb = 6}
-        \Return vrai
-    \EndIf
-
-    \For{i \From 1 \To 2$^{(\text{n} - 1) / 2}$ \By 2}
-        \Let somme \Gets somme + i$^3$
-
-    \EndFor
-
-    \Return nb = somme
-
-\EndModule
-
-\end{pseudo}
-\end{Emphase}
-
 
 \begin{Emphase}{Exercice 18 -- Décomposition en facteurs premiers}
 \begin{pseudoN}
@@ -444,20 +505,15 @@
     \Decl i~:~entier
     \Let i \Gets 2
     \While{i <= nb}
-        \If{nb MOD i = 0 ET estPremier(i)}
+        \While{nb MOD i = 0 ET estPremier(i)}
             \Write i
             \Let nb \Gets nb/i
             \If{nb >= 1}
                 \Write " * "
             \EndIf
-            \Let i \Gets i - 1
-        \EndIf
+        \EndWhile
         \Let i \Gets i + 1
     \EndWhile
-
-    \If{nb MOD i $\ne$ 0}
-        \Write " * ", nb MOD i
-    \EndIf
 
 \EndModule
 
@@ -496,7 +552,7 @@
 \Module{fourchette}{}{}
 
     \Decl nbRandom, essai, tentative~:~entiers
-    \Let tentative \Gets 1
+    \Let tentative \Gets 0
     \Let nbRandom \Gets hasard(100)
 
     \Repeat
@@ -524,7 +580,6 @@
 \end{pseudo}
 \end{Emphase}
 
-
 \begin{Emphase}{Exercice 21 -- IMC}
 \begin{pseudoN}
 
@@ -536,7 +591,7 @@
     \Repeat
 
         \Read sexe, poids, taille
-        \Let imc \Gets kilo / taille$^2$
+        \Let imc \Gets poids / taille$^2$
 
         \If{imc > 30}
             \Let obèse \Gets obèse + 1
@@ -544,7 +599,7 @@
 
         \Let nbPersonnes \Gets nbPersonnes + 1
 
-    \Until{sexe $\ne$ 'H' OU sexe $\ne$ 'F'}
+    \Until{sexe $\ne$ 'H' ET sexe $\ne$ 'F'}
 
     \Write obèse / nbPersonnes * 100
 
@@ -709,3 +764,4 @@
         \EndModule
 \end{pseudo}
 \end{Emphase}
+
