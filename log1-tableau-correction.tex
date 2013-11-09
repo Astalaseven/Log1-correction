@@ -471,6 +471,7 @@ caractères}{booléen}
 
 \Module{tableauVersChaine}{tab~:~\K{tableau} [1 à n] de caractères}{chaine}
 
+    \Decl i~:~caractère
     \Decl chaine~:~chaine
     \Let chaine \Gets ""
 
@@ -559,22 +560,26 @@ caractères}{booléen}
 \Module{doublon}{tabEnt~:~\K{tableau} [1 à n] d’entiers}{booléen}
 
     \Decl i, j~:~entiers
+    \Decl trouvé~:~booléen
 
-    \For{i \From 1 \To n}
+    \Let i \Gets j \Gets 1
+    \Let trouvé \Gets faux
 
-        \For{j \From 1 \To n}
+    \While{i $\le$ n ET NON trouvé}
 
-            \If{tabEnt[i] = tabEnt[j]}
-                
-                \Return vrai
+        \While{j $\le$ n ET NON trouvé}
 
-            \EndIf
+            \Let trouvé \Gets tabEnt[i] = tabEnt[j]
 
-        \EndFor
+            \Let j \Gets j + 1
 
-    \EndFor
+        \EndWhile
 
-    \Return faux
+        \Let i \Gets i + 1
+
+    \EndWhile
+
+    \Return trouvé
 
 \EndModule
 
@@ -653,6 +658,7 @@ caractères}{booléen}
 
     \Module{initialiser}{compteur\InOut~:~\K{tableau} [1 à 26] d’entiers}{}
 
+        \Decl i~:~entier
         \For{i \From 1 \To 26}
 
             \Let compteur[i] \Gets 0
