@@ -73,6 +73,7 @@
 
 \end{Emphase}
 
+\newpage
 
 \begin{Emphase}{Exercice 3 -- Indice maximum/minimum}
 
@@ -399,6 +400,8 @@ caractères}{booléen}
 
 \Module{initialiser}{occurrences\InOut~:~\K{tableau} [0 à 9] d’entiers}{}
 
+    \Decl i~:~entier
+
     \For{i \From 1 \To 9}
 
         \Let occurrences[i] \Gets 0
@@ -407,7 +410,7 @@ caractères}{booléen}
 
 \EndModule
 
-    \Empty
+    %\Empty
 
 \Module{compterOccurence}{occurrences\InOut~:~\K{tableau} [0 à 9] d’entiers, nb\In~:~entier}{}
 
@@ -423,9 +426,11 @@ caractères}{booléen}
 
 \EndModule
 
-    \Empty
+    %\Empty
 
 \Module{afficher}{occurrences~:~\K{tableau} [0 à 9] d’entiers}{}
+
+    \Decl i~:~entier
 
     \For{i \From 0 \To 9}
         

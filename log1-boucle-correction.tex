@@ -201,7 +201,7 @@
 
 \Module{suiteDeFibonacci}{n~:~entier}{}
 
-    \Decl val, prec~:~entnbers
+    \Decl val, prec~:~entiers
     \Let val \Gets 0
     \Let prec \Gets 1
 
@@ -212,7 +212,6 @@
     \EndFor
 
 \EndModule
-\\
 
 \end{pseudo}
 \end{Emphase}
@@ -273,18 +272,22 @@
 
     \For{i \From 1 \To n}
         \Write val
-        \Let pas \Gets pas + 1
 
         \If{pas = 10}
             \Let val \Gets val + 10
             \Let descendant \Gets NON descendant
+            \Let pas \Gets 0
+        \Else
+
+            \If{descendant}
+                \Let val \Gets val - 1
+            \Else
+                \Let val \Gets val + 1
+            \EndIf
+
         \EndIf
 
-        \If{descendant}
-            \Let val \Gets val - 1
-        \Else
-            \Let val \Gets val + 1
-        \EndIf
+        \Let pas \Gets pas + 1
 
     \EndFor
 
@@ -568,7 +571,7 @@
 
         \Let tentative \Gets tentative + 1
 
-    \Until{tentative = 8 OU nbRandom = essai}
+    \Until{tentative $\ne$ 8 OU nbRandom $\ne$ essai}
 
     \If{nbRandom $\ne$ essai}
         \Write "désolé, le nb était ", nbRandom
