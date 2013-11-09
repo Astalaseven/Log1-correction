@@ -5,6 +5,8 @@
 \usepackage{algorithm}			% Pour des algorithmes flottants
 \usepackage{environ}
 
+\usepackage{mdframed}
+
 % ==============================================================================
 % Le code suivant permet d'avoir des lignes verticales pour délimiter les blocs. 
 % cf: http://tex.stackexchange.com/questions/52473/is-it-possible-to-have-connecting-loop-lines-like-algorithm2e-in-algorithmic
@@ -13,7 +15,9 @@
 \makeatletter
 % This is the vertical rule that is inserted
 \definecolor{rulecolor}{gray}{0.7}
-\def\therule{\makebox[\algorithmicindent][l]{\hspace*{.4em}{\color{rulecolor}\vrule height .75\baselineskip width 0.05em depth .25\baselineskip}}}%
+\def\therule{\hspace*{.4em}{\color{rulecolor}\vrule height .75\baselineskip
+ width 0.05em depth .25\baselineskip}\hspace{0.35cm}}%
+
 
 \newtoks\therules% Contains rules
 \therules={}% Start with empty token list
@@ -178,7 +182,6 @@
 
 % =====
 \newenvironment{pseudo}[0]{
-	\begin{minipage}{0.95\linewidth}
 	\begin{sffamily}
 	\begin{algorithmic}[0]
 	\small
@@ -186,7 +189,6 @@
 {
 	\end{algorithmic}
 	\end{sffamily}
-	\end{minipage}
 }
 
 
@@ -199,9 +201,12 @@
   }
 
 \newcommand{\cadre}[1]{%
-	\fcolorbox{gray}{gray!10}{%
-		\begin{minipage}{0.97\linewidth}#1\end{minipage}%
-	}%
+        \vspace{0.25cm}
+    \begin{mdframed}[linewidth=.5,innerleftmargin=0.2cm,backgroundcolor=gray!10,linecolor=gray]%
+        \vspace{0.15cm}
+        #1
+        \vspace{-0.1cm}
+    \end{mdframed}
 	\smallskip
 }
 
