@@ -1,0 +1,688 @@
+\chapter*{Correction des exercices 8.7}
+
+\begin{Emphase}{Exercice 1 -- Somme}
+
+\begin{pseudoN}
+
+\Module{somme}{tabEnt~:~\K{tableau} [1 à n] d’entiers}{entier}
+
+    \Decl i, somme~:~entiers
+    \Let somme \Gets 0
+
+    \For{i \From 1 \To n}
+        
+        \Let somme \Gets somme + tabEnt[i]
+
+    \EndFor
+
+    \Return somme
+
+\EndModule
+
+\end{pseudo}
+
+\end{Emphase}
+
+
+
+\begin{Emphase}{Exercice 2 -- Maximum/minimum}
+
+\begin{pseudoN}
+
+    \Module{max}{tabEnt~:~\K{tableau} [1 à n] d’entiers}{entier}
+
+    \Decl max~:~entier
+    \Let max \Gets tabEnt[1]
+
+    \For{i \From 2 \To n}
+        
+        \If{tabEnt[i] > max}
+
+            \Let max \Gets tabEnt[i]
+
+        \EndIf
+
+    \EndFor
+
+    \Return max
+
+\EndModule
+
+\Empty
+
+\Module{min}{tabEnt~:~\K{tableau} [1 à n] d’entiers}{entier}
+
+    \Decl min~:~entier
+    \Let min \Gets tabEnt[1]
+
+    \For{i \From 2 \To n}
+        
+        \If{tabEnt[i] < min}
+
+            \Let min \Gets tabEnt[i]
+
+        \EndIf
+
+    \EndFor
+
+    \Return min
+
+\EndModule
+
+\end{pseudo}
+
+\end{Emphase}
+
+
+\begin{Emphase}{Exercice 3 -- Indice maximum/minimum}
+
+\begin{pseudoN}
+
+    \Module{indiceMax}{tabEnt~:~\K{tableau} [1 à n] d’entiers}{entier}
+
+    \Decl indiceMax~:~entier
+    \Let indiceMax \Gets 1
+
+    \For{i \From 2 \To n}
+        
+        \If{tabEnt[i] > tabEnt[indiceMax]}
+
+            \Let indiceMax \Gets i
+
+        \EndIf
+
+    \EndFor
+
+    \Return indiceMax
+
+\EndModule
+
+\Empty
+
+\Module{indiceMin}{tabEnt~:~\K{tableau} [1 à n] d’entiers}{entier}
+
+    \Decl indiceMin~:~entier
+    \Let indiceMin \Gets 1
+
+    \For{i \From 2 \To n}
+        
+        \If{tabEnt[i] < tabEnt[indiceMin]}
+
+            \Let indiceMin \Gets i
+
+        \EndIf
+
+    \EndFor
+
+    \Return indiceMin
+
+\EndModule
+
+\Empty
+
+\Module{max}{tabEnt~:~\K{tableau} [1 à n] d’entiers}{entier}
+
+    \Return tabEnt[indiceMax(tabEnt)]
+
+\EndModule
+
+\Empty
+
+\Module{min}{tabEnt~:~\K{tableau} [1 à n] d’entiers}{entier}
+
+    \Return tabEnt[indicemin(tabEnt)]
+
+\EndModule
+
+\end{pseudo}
+
+\end{Emphase}
+
+
+\begin{Emphase}{Exercice 4 -- Nombre d’éléments d’un tableau}
+
+\begin{pseudoN}
+
+\Module{tailleTableau}{tabRéels~:~tableau [1 à n] de réels}{entier}
+
+    \Return n
+
+\EndModule
+
+\end{pseudo}
+
+\end{Emphase}
+
+\begin{Emphase}{Exercice 5 -- Y a-t-il un pilote dans l’avion~?}
+
+\begin{pseudoN}
+
+\Module{piloteAvion}{avion~:~tableau [1 à n] de chaines}{booléen}
+
+    \Decl i~:~entier
+    \Decl trouvé~:~booléen
+
+    \Let i \Gets 1
+    \Let trouvé \Gets faux
+
+    \While{i $\le$ n ET NON trouvé}
+
+        \Let trouvé \Gets avion[i] = "pilote"
+        \Let i \Gets i +1
+
+    \EndWhile
+
+    \Return trouvé
+
+\EndModule
+
+\end{pseudo}
+
+\end{Emphase}
+
+
+\begin{Emphase}{Exercice 6 -- Plus grand écart absolu}
+
+\begin{pseudoN}
+
+\Module{plusGrandÉcartAbsolu}{températures~:~tableau [1 à n] de réels}{reél}
+
+    \Decl i, écart, écartMax, max, min~:~réels
+    \Let écartMax \Gets 0
+
+    \For{i \From 2 \To n}
+
+        \Let max \Gets max(températures[i-1], températures[i]) 
+        \Let min \Gets min(températures[i-1], températures[i]) 
+
+        \Let écart \Gets max - min
+        
+        \If{écart > écartMax}
+            
+            \Let écartMax \Gets écart
+
+        \EndIf
+
+    \EndFor
+
+    \Return écartMax
+
+    \EndModule
+
+\end{pseudo}
+
+\end{Emphase}
+
+
+\begin{Emphase}{Exercice 7 -- Remplacement de valeurs}
+
+\begin{pseudoN}
+
+    \Module{prénomEnMajuscule}{prénoms\In\Out~:~\K{tableau} [1 à n] de chaines}{}
+
+    \Decl i, j~:~caractère
+    \Decl prénom~:~chaine
+
+    \Let prénom \Gets ""
+
+    \For{i \From 1 \To n}
+        
+        \If{estMinuscule(car(prénoms[i], 1))}
+
+            \Let prénom \Gets majuscule(prénoms[i], 1)
+
+            \For{j \From 2 \To n}
+
+                \Let prénom \Gets concat(prénom, car(prénoms[i], j))
+
+            \EndFor
+
+            \Let prénoms[i] \Gets prénom
+
+        \EndIf
+
+    \EndFor
+
+\EndModule
+
+\end{pseudo}
+
+\end{Emphase}
+
+\begin{Emphase}{Exercice 8 -- Tableau ordonné}
+
+\begin{pseudoN}
+
+\Module{estTrié}{valeurs~:~\K{tableau} [1 à n] de chaines}{booléen}
+
+    \Decl i~:~entier
+    \Decl trié~:~booléen
+
+    \Let i \Gets 2
+    \Let trié \Gets vrai
+
+    \While{i $\le$ n ET trié}
+
+        \Let trié \Gets valeurs[i - 1] < valeurs[i]
+
+    \EndWhile
+
+    \Return trié
+
+\EndModule
+
+\end{pseudo}
+
+\end{Emphase}
+
+\newpage
+
+\begin{Emphase}{Exercice 9 -- Position des maxima}
+
+\begin{pseudoN}
+
+\Module{posMaxima}{cotes~:~\K{tableau} [1 à n] d’entiers}{}
+
+    \Decl i, indiceMax~:~entiers
+    \Let indiceMax \Gets indiceMax(cotes)
+
+    \For{i \From 1 \To n}
+
+        \If{tab[i] = tab[indiceMax]}
+
+            \Write tab[i]
+
+        \EndIf
+
+    \EndFor
+
+\EndModule
+
+\end{pseudo}
+
+\end{Emphase}
+
+
+\begin{Emphase}{Exercice 10 -- Renverser un tableau}
+
+\begin{pseudoN}
+
+    \Module{inverserTab}{tabCar~:~\K{tableau} [1 à n] de
+    caractères}{}
+
+    \Decl tabInversé~:~\K{tableau} [1 à n] de caractères
+    \Decl i~:~caractère
+
+    \For{i \From 1 \To n DIV 2}
+
+    \Let tabInversé[i] \Gets tabCar[n - i + 1]
+
+    \EndFor
+
+    \Let tabCar \Gets tabInversé
+
+\EndModule
+
+\end{pseudo}
+
+\end{Emphase}
+
+\begin{Emphase}{Exercice 11 -- Tableau symétrique}
+
+\begin{pseudoN}
+
+    \Module{symétrique}{tabCar~:~\K{tableau} [1 à n] de
+caractères}{booléen}
+
+    \Decl i~:~entier
+    \Decl symétrique~:~booléen
+
+    \Let i \Gets 1
+
+    \Let symétrique \Gets vrai
+
+    \While{i $\le$ n ET symétrique}
+
+        \Let symétrique \Gets tabCar[i] = tabCar[n -1 + 1]
+        \Let i \Gets i + 1
+
+    \EndWhile
+
+    \EndModule
+
+\end{pseudo}
+
+\end{Emphase}
+
+
+\begin{Emphase}{Exercice 12 -- Cumul des ventes}
+
+\begin{pseudoN}
+
+    \Module{cumulVente}{ventes~:~\K{tableau} [1 à 12] d’entiers}{\K{tableau} [1 à 12] d’entiers}
+
+    \Decl cumul~:~\K{tableau} [1 à 12] d’entiers
+    \Decl i~:~entier
+
+    \Let cumul \Gets ventes
+
+    \For{i \From 2 \To 12}
+
+        \Let cumul[i] \Gets cumul[i] + cumul[i - 1]
+
+    \EndFor
+
+    \Return cumul
+
+    \EndModule
+
+\end{pseudo}
+
+\end{Emphase}
+
+
+\begin{Emphase}{Exercice 13 -- Occurrence des chiffres}
+
+\begin{pseudoN}
+
+\Module{occurrence}{nb~:~entier}{}
+
+    \Decl occurrences~:~\K{tableau} [0 à 9] d’entiers
+
+    \Let initialiser(occurrences)
+    \Let compterOccurrence(occurrences, nb)
+    \Let afficher(occurrences)
+
+\EndModule
+
+    \Empty
+
+\Module{initialiser}{occurrences\InOut~:~\K{tableau} [0 à 9] d’entiers}{}
+
+    \For{i \From 1 \To 9}
+
+        \Let occurrences[i] \Gets 0
+
+    \EndFor
+
+\EndModule
+
+    \Empty
+
+\Module{compterOccurence}{occurrences\InOut~:~\K{tableau} [0 à 9] d’entiers, nb\In~:~entier}{}
+
+    \Decl chiffre~:~entier
+
+    \While{nb > 0}
+
+        \Let chiffre \Gets nb MOD 10
+        \Let nb \Gets nb DIV 10
+        \Let occurrences[chiffre] \Gets occurrences[chiffre] + 1
+
+    \EndWhile
+
+\EndModule
+
+    \Empty
+
+\Module{afficher}{occurrences~:~\K{tableau} [0 à 9] d’entiers}{}
+
+    \For{i \From 0 \To 9}
+        
+        \If{occurrences[i] > 0}
+
+            \Write i , "apparait" , occurrences[i] , "fois"
+
+        \EndIf
+
+    \EndFor
+
+\EndModule
+
+\end{pseudoN}
+
+\end{Emphase}
+
+
+\begin{Emphase}{Exercice 14 -- Palindrome}
+
+\begin{pseudoN}
+
+\Module{palindrome}{phrase~:~\K{tableau} [1 à n] de caractères}{booléen}
+
+    \Decl i~:~caractère
+    \Decl chaine, chaineNormalisée~:~chaines
+    \Decl tabNormalisé~:~\K{tableau} [1 à n] de caractères
+
+    \Let chaine \Gets tableauVersChaine(phrase)
+
+    \Let chaineNormalisée \Gets versAlpha(chaine)
+
+    \For{i \From 1 \To long(chaineNormalisée)}
+
+        \Let tabNormalisé[i] \Gets car(chaineNormalisée, i)
+    \EndFor
+
+    \Return symétrique(tabNormalisé)
+
+\EndModule
+
+    \Empty
+
+\Module{tableauVersChaine}{tab~:~\K{tableau} [1 à n] de caractères}{chaine}
+
+    \Decl chaine~:~chaine
+    \Let chaine \Gets ""
+
+    \For{i \From 1 \To n}
+
+        \Let chaine \Gets chaine + i
+
+    \EndFor
+
+    \Return chaine
+
+\EndModule
+
+
+\end{pseudoN}
+
+\end{Emphase}
+
+
+\begin{Emphase}{Exercice 15 -- Moyenne d’éléments}
+
+\begin{pseudoN}
+
+\Module{moyenne}{tabEnt~:~\K{tableau} [1 à n] d’entiers}{}
+
+    \Decl i, moyenne, somme, max~:~entiers
+
+    \Let max \Gets max2(indiceMax(tabEnt), indiceMin(tabEnt))
+    \Let i \Gets min2(indiceMax(tabEnt), indiceMin(tabEnt))
+
+    \While{i <= max}
+
+        \Let somme \Gets somme + tabEnt[i]
+
+        \Let i \Gets i + 1
+
+    \EndWhile
+
+    \Let moyenne \Gets $\displaystyle \dfrac{\text{somme}}{\text{max - i}}$
+
+    \Write moyenne
+
+
+\EndModule
+
+\end{pseudoN}
+
+\end{Emphase}
+
+
+\begin{Emphase}{Exercice 16 -- OXO}
+
+\begin{pseudoN}
+
+\Module{OXO}{oxo~:~\K{tableau} [1 à n] d’entiers}{}
+
+    \Decl i~:~entier
+
+    \Let i \Gets 1
+
+    \While{i $\le$ n - 2}
+
+        \If{oxo[i] = 'O' ET oxo[i + 1] = 'X' ET oxo[i + 2] = 'O'}
+            \Let compteur \Gets compteur + 1
+            \Let i \Gets i + 2
+
+        \EndIf
+
+        \Let i \Gets i + 1
+
+    \EndWhile
+
+    \Write compteur
+
+\EndModule
+
+\end{pseudoN}
+
+\end{Emphase}
+
+
+\begin{Emphase}{Exercice 17 -- Les doublons}
+
+\begin{pseudoN}
+
+\Module{doublon}{tabEnt~:~\K{tableau} [1 à n] d’entiers}{booléen}
+
+    \Decl i, j~:~entiers
+
+    \For{i \From 1 \To n}
+
+        \For{j \From 1 \To n}
+
+            \If{tabEnt[i] = tabEnt[j]}
+                
+                \Return vrai
+
+            \EndIf
+
+        \EndFor
+
+    \EndFor
+
+    \Return faux
+
+\EndModule
+
+\end{pseudoN}
+
+\end{Emphase}
+
+\newpage
+
+\begin{Emphase}{Exercice 18 -- Mastermind}
+
+\begin{pseudoN}
+
+\Module{testerProposition}{proposition\In, solution\In~:~\K{tableau} [1 à n] de Couleur, bienPlacés\Out, malPlacés\Out~:~entiers}{}
+
+    \Decl corrects~:~\K{tableau} [1 à n] de booléens
+    \Decl i, j~:~entiers
+    \Let initialiser(corrects, faux)
+    \Let bienPlacés \Gets 0
+    \Let malPlacés \Gets 0
+
+    \For{i \From 1 \To n}
+
+        \If{proposition[i] = solution[i]}
+
+            \Let corrects[i] \Gets vrai
+            \Let bienPlacés \Gets bienPlacés + 1
+
+        \Else
+
+            \Let j \Gets 1
+
+            \While{j $\le$ n ET (corrects[i] OU proposition[i] $\ne$ solution[i])}
+
+                \Let j \Gets j + 1
+
+            \EndWhile
+
+            \If{j $\le$ n}
+
+                \Let corrects[j] \Gets vrai
+                \Let malPlacés \Gets malPlacés + 1
+
+            \EndIf
+
+
+        \EndIf
+
+    \EndFor
+
+\EndModule
+
+    \Empty
+
+\Module{initialiser}{tabBool\InOut~:~\K{tableau} [1 à n] de booléens, bool\In~:~booléen}{}
+
+    \Decl i~:~entier
+
+    \For{i \From 1 \To n}
+
+        \Let tabBool[i] \Gets faux
+
+    \EndFor
+
+\EndModule
+
+\end{pseudoN}
+
+\end{Emphase}
+
+
+\begin{Emphase}{Exercice 19 -- Casser le chiffre de César}
+
+\begin{pseudoN}
+
+
+    \Module{initialiser}{compteur\InOut~:~\K{tableau} [1 à 26] d’entiers}{}
+
+        \For{i \From 1 \To 26}
+
+            \Let compteur[i] \Gets 0
+
+        \EndFor
+
+    \EndModule
+
+   \Empty
+
+   \Module{casserCésar}{msgChiffré~:~chaine}{}
+
+        \Decl compteur~:~\K{tableau} [1 à 26] d’entiers
+        \Decl lettre, décalage~:~entier
+        \Decl initialiser(compteur)
+        \For{i \From 1 \To long(msgChiffré)}
+
+            \Let lettre \Gets position(car(msgChiffré, i))
+            \Let compteur[lettre] \Gets compteur[lettre] + 1 
+
+        \EndFor
+
+        \Let décalage \Gets max(compteur) - 5
+
+        \Write décalage
+
+    \EndModule
+
+\end{pseudoN}
+\end{Emphase}
+    
+
+
