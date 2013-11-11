@@ -31,7 +31,7 @@
 
     \Module{max}{tabEnt~:~\K{tableau} [1 à n] d’entiers}{entier}
 
-    \Decl max~:~entier
+    \Decl i, max~:~entiers
     \Let max \Gets tabEnt[1]
 
     \For{i \From 2 \To n}
@@ -52,7 +52,7 @@
 
 \Module{min}{tabEnt~:~\K{tableau} [1 à n] d’entiers}{entier}
 
-    \Decl min~:~entier
+    \Decl i, min~:~entiers
     \Let min \Gets tabEnt[1]
 
     \For{i \From 2 \To n}
@@ -81,7 +81,7 @@
 
     \Module{indiceMax}{tabEnt~:~\K{tableau} [1 à n] d’entiers}{entier}
 
-    \Decl indiceMax~:~entier
+    \Decl i, indiceMax~:~entiers
     \Let indiceMax \Gets 1
 
     \For{i \From 2 \To n}
@@ -102,7 +102,7 @@
 
 \Module{indiceMin}{tabEnt~:~\K{tableau} [1 à n] d’entiers}{entier}
 
-    \Decl indiceMin~:~entier
+    \Decl i, indiceMin~:~entiers
     \Let indiceMin \Gets 1
 
     \For{i \From 2 \To n}
@@ -131,7 +131,7 @@
 
 \Module{min}{tabEnt~:~\K{tableau} [1 à n] d’entiers}{entier}
 
-    \Return tabEnt[indicemin(tabEnt)]
+    \Return tabEnt[indiceMin(tabEnt)]
 
 \EndModule
 
@@ -198,11 +198,7 @@
 
         \Let écart \Gets max - min
         
-        \If{écart > écartMax}
-            
-            \Let écartMax \Gets écart
-
-        \EndIf
+        \Let écartMax \Gets max(écart, écartMax)
 
     \EndFor
 
@@ -221,7 +217,7 @@
 
     \Module{prénomEnMajuscule}{prénoms\In\Out~:~\K{tableau} [1 à n] de chaines}{}
 
-    \Decl i, j~:~caractère
+    \Decl i, j~:~caractères
     \Decl prénom~:~chaine
 
     \Let prénom \Gets ""
@@ -507,7 +503,7 @@ caractères}{booléen}
     \Let max \Gets max2(indiceMax(tabEnt), indiceMin(tabEnt))
     \Let i \Gets min2(indiceMax(tabEnt), indiceMin(tabEnt))
 
-    \While{i <= max}
+    \While{i $\le$ max}
 
         \Let somme \Gets somme + tabEnt[i]
 
@@ -629,7 +625,6 @@ caractères}{booléen}
                 \Let malPlacés \Gets malPlacés + 1
 
             \EndIf
-
 
         \EndIf
 
